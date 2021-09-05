@@ -14,14 +14,25 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public Optional<UsuarioModel> obtenerPorId(Long id){
+    public Optional<UsuarioModel> obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
     }
-    public ArrayList<UsuarioModel> obtenerPorTipo(Integer Tipo) {
+
+    public ArrayList<UsuarioModel> obtenerUsuariosPorTipo(Integer Tipo) {
         return usuarioRepository.findByTipo(Tipo);
     }
 
-    public UsuarioModel guardarUsuario(UsuarioModel usuario){
+    public UsuarioModel guardarUsuario(UsuarioModel usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+
+    public boolean eliminarUsuario(Long id) {
+        try {
+            usuarioRepository.deleteById(id);
+            return true;
+        } catch (Exception err) {
+            return false;
+        }
     }
 }
