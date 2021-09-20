@@ -31,7 +31,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/query")
-    public ArrayList<UsuarioModel> obtenerUsuarioPorPrioridad(@RequestParam("tipo") Integer tipo){
+    public ArrayList<UsuarioModel> obtenerUsuariosPorTipo(@RequestParam("tipo") Integer tipo){
         return this.usuarioService.obtenerUsuariosPorTipo(tipo);
     }
 

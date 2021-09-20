@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
-@Table(name = "vuelo")
+@Table(name = "vuelos")
 public class VueloModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

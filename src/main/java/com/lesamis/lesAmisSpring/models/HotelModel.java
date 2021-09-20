@@ -3,7 +3,7 @@ package com.lesamis.lesAmisSpring.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "hotel")
+@Table(name = "hoteles")
 public class HotelModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

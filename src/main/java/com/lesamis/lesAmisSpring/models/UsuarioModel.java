@@ -4,7 +4,7 @@ package com.lesamis.lesAmisSpring.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class UsuarioModel {
 
     @Id

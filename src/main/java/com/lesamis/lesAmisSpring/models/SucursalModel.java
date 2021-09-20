@@ -3,13 +3,14 @@ package com.lesamis.lesAmisSpring.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sucursal")
+@Table(name = "sucursales")
 public class SucursalModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
 
+    private Long idAgencia;
     private String codigo;
     private String direccion;
     private String telefono;
@@ -20,6 +21,14 @@ public class SucursalModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdAgencia() {
+        return idAgencia;
+    }
+
+    public void setIdAgencia(Long idAgencia) {
+        this.idAgencia = idAgencia;
     }
 
     public String getCodigo() {
