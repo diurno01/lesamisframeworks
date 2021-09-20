@@ -14,6 +14,10 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    public ArrayList<UsuarioModel> obtenerUsuarios(){
+        return (ArrayList<UsuarioModel>) usuarioRepository.findAll();
+    }
+
     public Optional<UsuarioModel> obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
     }

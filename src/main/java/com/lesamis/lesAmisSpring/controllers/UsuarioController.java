@@ -15,18 +15,24 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    @GetMapping( path = "/{id}")
-    public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
-        return this.usuarioService.obtenerUsuarioPorId(id);
-    }
-    @GetMapping("/query")
-    public ArrayList<UsuarioModel> obtenerUsuarioPorTipo(@RequestParam("tipo") Integer tipo){
-        return this.usuarioService.obtenerUsuariosPorTipo(tipo);
+    @GetMapping()
+    public ArrayList<UsuarioModel> obtenerUsuarios(){
+        return usuarioService.obtenerUsuarios();
     }
 
     @PostMapping()
     public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario){
         return this.usuarioService.guardarUsuario(usuario);
+    }
+
+    @GetMapping( path = "/{id}")
+    public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
+        return this.usuarioService.obtenerUsuarioPorId(id);
+    }
+
+    @GetMapping("/query")
+    public ArrayList<UsuarioModel> obtenerUsuarioPorPrioridad(@RequestParam("tipo") Integer tipo){
+        return this.usuarioService.obtenerUsuariosPorTipo(tipo);
     }
 
     @DeleteMapping( path = "/{id}")
