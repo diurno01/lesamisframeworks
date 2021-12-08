@@ -14,7 +14,21 @@ public class HotelModel {
     private String direccion;
     private String ciudad;
     private String telefono;
-    private Integer numeroDePlazas;
+    private int numeroDePlazas;
+    private int precioPensionCompleta;
+    private int precioMediaPension;
+
+    public HotelModel(){};
+
+    public HotelModel(String nombre, String direccion, String ciudad, String telefono, int numeroDePlazas, int precioPensionCompleta, int precioMediaPension) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.ciudad = ciudad;
+        this.telefono = telefono;
+        this.numeroDePlazas = numeroDePlazas;
+        this.precioPensionCompleta = precioPensionCompleta;
+        this.precioMediaPension = precioMediaPension;
+    }
 
     public Long getId() {
         return id;
@@ -56,11 +70,27 @@ public class HotelModel {
         this.telefono = telefono;
     }
 
-    public Integer getNumeroDePlazas() {
+    public int getNumeroDePlazas() {
         return numeroDePlazas;
     }
 
-    public void setNumeroDePlazas(Integer numeroDePlazas) {
+    public void setNumeroDePlazas(int numeroDePlazas) {
         this.numeroDePlazas = numeroDePlazas;
+    }
+
+    public int getPrecioPensionCompleta() {
+        return precioPensionCompleta;
+    }
+
+    public void setPrecioPensionCompleta(int precioPensionCompleta) {
+        this.precioPensionCompleta = precioPensionCompleta;
+    }
+
+    public int getPrecioMediaPension() {
+        return precioMediaPension;
+    }
+
+    public void setPrecioMediaPension(int precioMediaPension) {
+        this.precioMediaPension = precioMediaPension;
     }
 }

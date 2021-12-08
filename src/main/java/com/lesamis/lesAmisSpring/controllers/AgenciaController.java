@@ -21,8 +21,8 @@ public class AgenciaController {
         return agenciaService.obtenerAgencias();
     }
 
-    @GetMapping()
-    public ArrayList<SucursalModel> obtenerSucursalesDeAgencia(Long id){
-        return agenciaService.obtenerSucursalesDeAgencia(id);
-    }
+//    @GetMapping()
+//    public ArrayList<SucursalModel> obtenerSucursalesDeAgencia(Long id){
+//        return agenciaService.obtenerSucursalesDeAgencia(id);
+//    }
 }
