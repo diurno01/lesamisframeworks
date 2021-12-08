@@ -18,7 +18,27 @@ public class UsuarioModel {
     private String apellido;
     private String telefono;
     private String email;
-    private Integer tipo;
+    private Tipo tipo;
+
+    public UsuarioModel(){};
+
+    public UsuarioModel(String usuario, String password, String nombre, String apellido, String telefono, String email, Tipo tipo) {
+        this.usuario = usuario;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.email = email;
+        this.tipo = tipo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsuario() {
         return usuario;
@@ -34,14 +54,6 @@ public class UsuarioModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNombre() {
@@ -76,11 +88,11 @@ public class UsuarioModel {
         this.email = email;
     }
 
-    public Integer getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(Integer tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 }

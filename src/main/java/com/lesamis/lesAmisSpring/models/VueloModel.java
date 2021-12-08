@@ -16,8 +16,23 @@ public class VueloModel {
     private Date fechaYHora;
     private String origen;
     private String destino;
-    private Integer plazasPrimeraClase;
-    private Integer plazasClaseTurista;
+    private int plazasPrimeraClase;
+    private int plazasClaseTurista;
+    private int precioPrimeraClase;
+    private int precioClaseturista;
+
+    public VueloModel(){};
+
+    public VueloModel(Long numeroDeVuelo, Date fechaYHora, String origen, String destino, int plazasPrimeraClase, int plazasClaseTurista, int precioPrimeraClase, int precioClaseturista) {
+        this.numeroDeVuelo = numeroDeVuelo;
+        this.fechaYHora = fechaYHora;
+        this.origen = origen;
+        this.destino = destino;
+        this.plazasPrimeraClase = plazasPrimeraClase;
+        this.plazasClaseTurista = plazasClaseTurista;
+        this.precioPrimeraClase = precioPrimeraClase;
+        this.precioClaseturista = precioClaseturista;
+    }
 
     public Long getId() {
         return id;
@@ -59,19 +74,35 @@ public class VueloModel {
         this.destino = destino;
     }
 
-    public Integer getPlazasPrimeraClase() {
+    public int getPlazasPrimeraClase() {
         return plazasPrimeraClase;
     }
 
-    public void setPlazasPrimeraClase(Integer plazasPrimeraClase) {
+    public void setPlazasPrimeraClase(int plazasPrimeraClase) {
         this.plazasPrimeraClase = plazasPrimeraClase;
     }
 
-    public Integer getPlazasClaseTurista() {
+    public int getPlazasClaseTurista() {
         return plazasClaseTurista;
     }
 
-    public void setPlazasClaseTurista(Integer plazasClaseTurista) {
+    public void setPlazasClaseTurista(int plazasClaseTurista) {
         this.plazasClaseTurista = plazasClaseTurista;
+    }
+
+    public int getPrecioPrimeraClase() {
+        return precioPrimeraClase;
+    }
+
+    public void setPrecioPrimeraClase(int precioPrimeraClase) {
+        this.precioPrimeraClase = precioPrimeraClase;
+    }
+
+    public int getPrecioClaseturista() {
+        return precioClaseturista;
+    }
+
+    public void setPrecioClaseturista(int precioClaseturista) {
+        this.precioClaseturista = precioClaseturista;
     }
 }

@@ -14,6 +14,12 @@ public class SucursalModel {
     private String codigo;
     private String direccion;
     private String telefono;
+    @OneToOne
+    private AgenciaModel agencia;
+
+    public SucursalModel(){};
+
+
 
     public Long getId() {
         return id;
