@@ -18,29 +18,31 @@ public class VueloController {
     @Autowired
     VueloService vueloService;
 
-    @GetMapping()
-    public ArrayList<VueloModel> obtenerVuelos(){
-        return vueloService.obtenerVuelos();
-    }
 
-    @PostMapping()
-    public VueloModel guardarVuelo(@RequestBody VueloModel vuelo){
-        return this.vueloService.agregarVuelo(vuelo);
-    }
 
-    @GetMapping( path = "/{id}")
-    public Optional<VueloModel> obtenerVueloPorId(@PathVariable("id") Long id) {
-        return this.vueloService.obtenerVueloPorId(id);
-    }
-
-    @DeleteMapping( path = "/{id}")
-    public String eliminarVueloPorId(@PathVariable("id") Long id){
-        boolean ok = this.vueloService.eliminarVuelo(id);
-        if (ok){
-            return "Se eliminó el vuelo con id " + id;
-        }else{
-            return "No pudo eliminar el vuelo con id" + id;
-        }
-    }
+//    @GetMapping()
+//    public ArrayList<VueloModel> obtenerVuelos(){
+//        return vueloService.obtenerVuelos();
+//    }
+//
+//    @PostMapping()
+//    public VueloModel guardarVuelo(@RequestBody VueloModel vuelo){
+//        return this.vueloService.agregarVuelo(vuelo);
+//    }
+//
+//    @GetMapping( path = "/{id}")
+//    public Optional<VueloModel> obtenerVueloPorId(@PathVariable("id") Long id) {
+//        return this.vueloService.obtenerVueloPorId(id);
+//    }
+//
+//    @DeleteMapping( path = "/{id}")
+//    public String eliminarVueloPorId(@PathVariable("id") Long id){
+//        boolean ok = this.vueloService.eliminarVuelo(id);
+//        if (ok){
+//            return "Se eliminó el vuelo con id " + id;
+//        }else{
+//            return "No pudo eliminar el vuelo con id" + id;
+//        }
+//    }
 
 }
