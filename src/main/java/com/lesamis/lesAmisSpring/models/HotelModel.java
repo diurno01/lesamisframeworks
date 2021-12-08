@@ -14,13 +14,14 @@ public class HotelModel {
     private String direccion;
     private String ciudad;
     private String telefono;
-    private int numeroDePlazas;
-    private int precioPensionCompleta;
-    private int precioMediaPension;
+
+    private Integer numeroDePlazas;
+    private Float precioPensionCompleta;
+    private Float precioMediaPension;
 
     public HotelModel(){};
 
-    public HotelModel(String nombre, String direccion, String ciudad, String telefono, int numeroDePlazas, int precioPensionCompleta, int precioMediaPension) {
+    public HotelModel(String nombre, String direccion, String ciudad, String telefono, Integer numeroDePlazas, Float precioPensionCompleta, Float precioMediaPension) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
@@ -70,27 +71,27 @@ public class HotelModel {
         this.telefono = telefono;
     }
 
-    public int getNumeroDePlazas() {
+    public Integer getNumeroDePlazas() {
         return numeroDePlazas;
     }
 
-    public void setNumeroDePlazas(int numeroDePlazas) {
+    public void setNumeroDePlazas(Integer numeroDePlazas) {
         this.numeroDePlazas = numeroDePlazas;
     }
 
-    public int getPrecioPensionCompleta() {
+    public Float getPrecioPensionCompleta() {
         return precioPensionCompleta;
     }
 
-    public void setPrecioPensionCompleta(int precioPensionCompleta) {
+    public void setPrecioPensionCompleta(Float precioPensionCompleta) {
         this.precioPensionCompleta = precioPensionCompleta;
     }
 
-    public int getPrecioMediaPension() {
+    public Float getPrecioMediaPension() {
         return precioMediaPension;
     }
 
-    public void setPrecioMediaPension(int precioMediaPension) {
+    public void setPrecioMediaPension(Float precioMediaPension) {
         this.precioMediaPension = precioMediaPension;
     }
 }
