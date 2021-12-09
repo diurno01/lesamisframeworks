@@ -16,14 +16,14 @@ public class VueloModel {
     private Date fechaYHora;
     private String origen;
     private String destino;
-    private int plazasPrimeraClase;
-    private int plazasClaseTurista;
-    private int precioPrimeraClase;
-    private int precioClaseturista;
+    private Integer plazasPrimeraClase;
+    private Integer plazasClaseTurista;
+    private Float precioPrimeraClase;
+    private Float precioClaseturista;
 
     public VueloModel(){};
 
-    public VueloModel(Long numeroDeVuelo, Date fechaYHora, String origen, String destino, int plazasPrimeraClase, int plazasClaseTurista, int precioPrimeraClase, int precioClaseturista) {
+    public VueloModel(Long numeroDeVuelo, Date fechaYHora, String origen, String destino, Integer plazasPrimeraClase, Integer plazasClaseTurista, Float precioPrimeraClase, Float precioClaseturista) {
         this.numeroDeVuelo = numeroDeVuelo;
         this.fechaYHora = fechaYHora;
         this.origen = origen;
@@ -74,35 +74,35 @@ public class VueloModel {
         this.destino = destino;
     }
 
-    public int getPlazasPrimeraClase() {
+    public Integer getPlazasPrimeraClase() {
         return plazasPrimeraClase;
     }
 
-    public void setPlazasPrimeraClase(int plazasPrimeraClase) {
+    public void setPlazasPrimeraClase(Integer plazasPrimeraClase) {
         this.plazasPrimeraClase = plazasPrimeraClase;
     }
 
-    public int getPlazasClaseTurista() {
+    public Integer getPlazasClaseTurista() {
         return plazasClaseTurista;
     }
 
-    public void setPlazasClaseTurista(int plazasClaseTurista) {
+    public void setPlazasClaseTurista(Integer plazasClaseTurista) {
         this.plazasClaseTurista = plazasClaseTurista;
     }
 
-    public int getPrecioPrimeraClase() {
+    public Float getPrecioPrimeraClase() {
         return precioPrimeraClase;
     }
 
-    public void setPrecioPrimeraClase(int precioPrimeraClase) {
+    public void setPrecioPrimeraClase(Float precioPrimeraClase) {
         this.precioPrimeraClase = precioPrimeraClase;
     }
 
-    public int getPrecioClaseturista() {
+    public Float getPrecioClaseturista() {
         return precioClaseturista;
     }
 
-    public void setPrecioClaseturista(int precioClaseturista) {
+    public void setPrecioClaseturista(Float precioClaseturista) {
         this.precioClaseturista = precioClaseturista;
     }
 }
