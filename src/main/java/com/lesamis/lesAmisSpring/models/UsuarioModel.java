@@ -14,6 +14,7 @@ public class UsuarioModel {
 
     private String usuario;
     private String password;
+    private Long dni;
     private String nombre;
     private String apellido;
     private String direccion;
@@ -23,23 +24,16 @@ public class UsuarioModel {
 
     public UsuarioModel(){}
 
-    public UsuarioModel(String usuario, String password, String nombre, String apellido, String direccion, String telefono, String email, Tipo tipo) {
+    public UsuarioModel(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, Tipo tipo) {
         this.usuario = usuario;
         this.password = password;
+        this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
         this.tipo = tipo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsuario() {
@@ -56,6 +50,14 @@ public class UsuarioModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getDni() {
+        return dni;
+    }
+
+    public void setDni(Long dni) {
+        this.dni = dni;
     }
 
     public String getNombre() {

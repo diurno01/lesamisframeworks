@@ -26,10 +26,17 @@ public class VueloController {
     }
 
     @GetMapping("/detalle/{id}")
-    public ResponseEntity<VueloModel> obtenerHotelPorId(@PathVariable("id") Long id){
+    public ResponseEntity<VueloModel> obtenerVueloPorId(@PathVariable("id") Long id){
         if(!vueloService.existsById(id))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         VueloModel vuelo = vueloService.obtenerVueloPorId(id).get();
+        return new ResponseEntity<>(vuelo, HttpStatus.OK);
+    }
+    @GetMapping("/detalle/numero/{id}")
+    public ResponseEntity<VueloModel> obtenerVueloPorNumeroDeVuelo(@PathVariable("nomeroDeVuelo") Long nomeroDeVuelo){
+        if(!vueloService.existsByNumeroDeVuelo(nomeroDeVuelo))
+            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+        VueloModel vuelo = vueloService.findByNumeroDeVuelo(nomeroDeVuelo).get();
         return new ResponseEntity<>(vuelo, HttpStatus.OK);
     }
 
