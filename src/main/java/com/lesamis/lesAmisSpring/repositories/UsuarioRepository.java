@@ -5,11 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {
 
-    public abstract ArrayList<UsuarioModel> findByTipo(Integer tipo);
+    Optional<UsuarioModel> findByNombreAndApellido(String nombre,String apellido);
 
 }

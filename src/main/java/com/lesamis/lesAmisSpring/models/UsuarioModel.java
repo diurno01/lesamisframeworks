@@ -16,17 +16,19 @@ public class UsuarioModel {
     private String password;
     private String nombre;
     private String apellido;
+    private String direccion;
     private String telefono;
     private String email;
     private Tipo tipo;
 
-    public UsuarioModel(){};
+    public UsuarioModel(){}
 
-    public UsuarioModel(String usuario, String password, String nombre, String apellido, String telefono, String email, Tipo tipo) {
+    public UsuarioModel(String usuario, String password, String nombre, String apellido, String direccion, String telefono, String email, Tipo tipo) {
         this.usuario = usuario;
         this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
         this.tipo = tipo;
@@ -70,6 +72,14 @@ public class UsuarioModel {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getTelefono() {
