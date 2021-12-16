@@ -14,6 +14,7 @@ public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {
 
     Optional<UsuarioModel> findByDni(Long dni);
     Optional<UsuarioModel> findByTipo(Tipo tipo);
+    Optional<UsuarioModel> findByUsuario(String Usuario);
     boolean existsByDni(Long dni);
     boolean existsByUsuario(String usuario);
 

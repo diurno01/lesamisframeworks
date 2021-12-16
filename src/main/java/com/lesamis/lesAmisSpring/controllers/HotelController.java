@@ -46,11 +46,11 @@ public class HotelController {
     }
 
     @GetMapping("/detalle/{nombre}")
-    public ResponseEntity obtenerPorNombre(@PathVariable("nombre") String nombre){
+    public ResponseEntity<Object> obtenerPorNombre(@PathVariable("nombre") String nombre){
         if(!hotelService.existsByNombre(nombre))
-            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Object>(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         HotelModel hotel = hotelService.obtenerPorNombre(nombre).get();
-        return new ResponseEntity(hotel, HttpStatus.OK);
+        return new ResponseEntity<Object>(hotel, HttpStatus.OK);
     }
 
     @PostMapping("/crear")
@@ -114,16 +114,16 @@ public class HotelController {
         hotelModel.setPrecioPensionCompleta(hotel.getPrecioPensionCompleta());
 
         hotelService.agregarHotel(hotelModel);
-        return new ResponseEntity(new MensajeModel("Hotel actualizado exitosamente"), HttpStatus.OK);
+        return new ResponseEntity<>(new MensajeModel("Hotel actualizado exitosamente"), HttpStatus.OK);
     }
 
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")Long id){
         if(!hotelService.existsById(id))
-            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         hotelService.delete(id);
-        return new ResponseEntity(new MensajeModel("Hotel eliminado"), HttpStatus.OK);
+        return new ResponseEntity<>(new MensajeModel("Hotel eliminado"), HttpStatus.OK);
     }
  //   @GetMapping( path = "/{id}")
    // public Optional<HotelModel> obtenerHotelPorId(@PathVariable("id") Long id) {

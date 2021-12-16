@@ -24,8 +24,12 @@ public class UsuarioService {
         return usuarioRepository.findById(id);
     }
 
-    public Optional<UsuarioModel> findByDni(Long dni) {
+    public Optional<UsuarioModel> obtenerPorDni(Long dni) {
         return usuarioRepository.findByDni(dni);
+    }
+
+    public Optional<UsuarioModel> obtenerPorUsuario(String usuario) {
+        return usuarioRepository.findByUsuario(usuario);
     }
 
     public Optional<UsuarioModel> obtenerUsuariosPorTipo(Tipo Tipo) {
@@ -33,8 +37,7 @@ public class UsuarioService {
     }
 
 
-
-    public UsuarioModel guardarUsuario(UsuarioModel usuario) {
+    public UsuarioModel agregarUsuario(UsuarioModel usuario) {
         return usuarioRepository.save(usuario);
     }
 
