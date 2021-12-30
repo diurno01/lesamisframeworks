@@ -34,7 +34,7 @@ public class HotelController {
     @GetMapping("/lista")
     public ResponseEntity<List<HotelModel>> obtenerHoteles(){
         List<HotelModel> list = hotelService.obtenerHoteles();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/detalle/{id}")
@@ -42,37 +42,37 @@ public class HotelController {
         if(!hotelService.existsById(id))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         HotelModel hotel = hotelService.obtenerHotelPorId(id).get();
-        return new ResponseEntity<>(hotel, HttpStatus.OK);
+        return new ResponseEntity(hotel, HttpStatus.OK);
     }
 
     @GetMapping("/detalle/{nombre}")
-    public ResponseEntity<Object> obtenerPorNombre(@PathVariable("nombre") String nombre){
+    public ResponseEntity<HotelModel> obtenerPorNombre(@PathVariable("nombre") String nombre){
         if(!hotelService.existsByNombre(nombre))
-            return new ResponseEntity<Object>(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         HotelModel hotel = hotelService.obtenerPorNombre(nombre).get();
-        return new ResponseEntity<Object>(hotel, HttpStatus.OK);
+        return new ResponseEntity(hotel, HttpStatus.OK);
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<?> create(@RequestBody HotelModel hotel){
+    public ResponseEntity<HotelModel> create(@RequestBody HotelModel hotel){
         if(StringUtils.isBlank(hotel.getNombre()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar el nombre del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar el nombre del Hotel"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(hotel.getDireccion()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar la dirección del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar la dirección del Hotel"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(hotel.getCiudad()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar la ciudad del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar la ciudad del Hotel"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(hotel.getTelefono()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar el telefono del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar el telefono del Hotel"), HttpStatus.BAD_REQUEST);
         if(hotel.getNumeroDePlazas() == null || hotel.getNumeroDePlazas() < 0 )
-            return new ResponseEntity<>(new MensajeModel("La cantidad de plazas debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("La cantidad de plazas debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(hotel.getPrecioMediaPension() == null || hotel.getPrecioMediaPension() < 0 )
-            return new ResponseEntity<>(new MensajeModel("El precio de la media pension debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El precio de la media pension debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(hotel.getPrecioPensionCompleta() == null || hotel.getPrecioPensionCompleta() < 0 )
-            return new ResponseEntity<>(new MensajeModel("El precio de la pension completa debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El precio de la pension completa debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(hotel.getPrecioMediaPension() > hotel.getPrecioPensionCompleta() )
-            return new ResponseEntity<>(new MensajeModel("El precio de la pension completa tiene que ser superior al de la pension media"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El precio de la pension completa tiene que ser superior al de la pension media"), HttpStatus.BAD_REQUEST);
         if(hotelService.existsByNombre(hotel.getNombre()))
-            return new ResponseEntity<>(new MensajeModel("El nombre del hotel ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El nombre del hotel ya existe"), HttpStatus.BAD_REQUEST);
         HotelModel hotelModel = new HotelModel(hotel.getNombre(),
                 hotel.getDireccion(),
                 hotel.getCiudad(),
@@ -81,29 +81,31 @@ public class HotelController {
                 hotel.getPrecioPensionCompleta(),
                 hotel.getPrecioMediaPension());
         hotelService.agregarHotel(hotelModel);
-        return new ResponseEntity<>(new MensajeModel("El hotel ha sido registrado exitosamente") , HttpStatus.OK);
+        return new ResponseEntity(new MensajeModel("El hotel ha sido registrado exitosamente") , HttpStatus.OK);
     }
 
     @PutMapping("/actualizar/{id}")
-    public ResponseEntity<?> update(@PathVariable("id")Long id, @RequestBody HotelModel hotel){
+    public ResponseEntity<HotelModel> update(@PathVariable("id")Long id, @RequestBody HotelModel hotel){
+        if(!hotelService.existsById(id))
+            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         if(StringUtils.isBlank(hotel.getNombre()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar el nombre del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar el nombre del Hotel"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(hotel.getDireccion()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar la dirección del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar la dirección del Hotel"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(hotel.getCiudad()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar la ciudad del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar la ciudad del Hotel"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(hotel.getTelefono()))
-            return new ResponseEntity<>(new MensajeModel("Olvido competar el telefono del Hotel"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("Olvido competar el telefono del Hotel"), HttpStatus.BAD_REQUEST);
         if(hotel.getNumeroDePlazas() == null || hotel.getNumeroDePlazas() < 0 )
-            return new ResponseEntity<>(new MensajeModel("La cantidad de plazas debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("La cantidad de plazas debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(hotel.getPrecioMediaPension() == null || hotel.getPrecioMediaPension() < 0 )
-            return new ResponseEntity<>(new MensajeModel("El precio de la media pension debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El precio de la media pension debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(hotel.getPrecioPensionCompleta() == null || hotel.getPrecioPensionCompleta() < 0 )
-            return new ResponseEntity<>(new MensajeModel("El precio de la pension completa debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El precio de la pension completa debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(hotel.getPrecioMediaPension() > hotel.getPrecioPensionCompleta() )
-            return new ResponseEntity<>(new MensajeModel("El precio de la pension completa tiene que ser superior al de la pension media"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El precio de la pension completa tiene que ser superior al de la pension media"), HttpStatus.BAD_REQUEST);
         if(hotelService.existsByNombre(hotel.getNombre()))
-            return new ResponseEntity<>(new MensajeModel("El nombre del hotel ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new MensajeModel("El nombre del hotel ya existe"), HttpStatus.BAD_REQUEST);
 
         HotelModel hotelModel = hotelService.obtenerHotelPorId(id).get();
         hotelModel.setNombre(hotel.getNombre());
@@ -114,16 +116,16 @@ public class HotelController {
         hotelModel.setPrecioPensionCompleta(hotel.getPrecioPensionCompleta());
 
         hotelService.agregarHotel(hotelModel);
-        return new ResponseEntity<>(new MensajeModel("Hotel actualizado exitosamente"), HttpStatus.OK);
+        return new ResponseEntity(new MensajeModel("Hotel actualizado exitosamente"), HttpStatus.OK);
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id")Long id){
+    public ResponseEntity<HotelModel> delete(@PathVariable("id")Long id){
         if(!hotelService.existsById(id))
-            return new ResponseEntity<>(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         hotelService.delete(id);
-        return new ResponseEntity<>(new MensajeModel("Hotel eliminado"), HttpStatus.OK);
+        return new ResponseEntity(new MensajeModel("Hotel eliminado"), HttpStatus.OK);
     }
  //   @GetMapping( path = "/{id}")
    // public Optional<HotelModel> obtenerHotelPorId(@PathVariable("id") Long id) {

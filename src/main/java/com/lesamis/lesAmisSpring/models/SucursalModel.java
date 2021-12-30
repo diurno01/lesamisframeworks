@@ -10,7 +10,6 @@ public class SucursalModel {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    private Long idAgencia;
     private String codigo;
     private String direccion;
     private String telefono;
@@ -19,7 +18,12 @@ public class SucursalModel {
 
     public SucursalModel(){};
 
-
+    public SucursalModel(String codigo, String direccion, String telefono, AgenciaModel agencia) {
+        this.codigo = codigo;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.agencia = agencia;
+    }
 
     public Long getId() {
         return id;
@@ -27,14 +31,6 @@ public class SucursalModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdAgencia() {
-        return idAgencia;
-    }
-
-    public void setIdAgencia(Long idAgencia) {
-        this.idAgencia = idAgencia;
     }
 
     public String getCodigo() {
@@ -59,5 +55,13 @@ public class SucursalModel {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public AgenciaModel getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(AgenciaModel agencia) {
+        this.agencia = agencia;
     }
 }

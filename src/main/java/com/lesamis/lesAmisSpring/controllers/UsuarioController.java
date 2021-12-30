@@ -22,7 +22,7 @@ public class UsuarioController {
     @GetMapping("/lista")
     public ResponseEntity<List<UsuarioModel>> obtenerUsuarios(){
         List<UsuarioModel> list = usuarioService.obtenerUsuarios();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/detalle/{id}")
@@ -30,7 +30,7 @@ public class UsuarioController {
         if(!usuarioService.existsById(id))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         UsuarioModel usuario = usuarioService.obtenerUsuarioPorId(id).get();
-        return new ResponseEntity<>(usuario, HttpStatus.OK);
+        return new ResponseEntity(usuario, HttpStatus.OK);
     }
 
     @GetMapping("/dni/{dni}")
@@ -38,7 +38,7 @@ public class UsuarioController {
         if(!usuarioService.existsByDni(dni))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         UsuarioModel usuario = usuarioService.obtenerPorDni(dni).get();
-        return new ResponseEntity<>(usuario, HttpStatus.OK);
+        return new ResponseEntity(usuario, HttpStatus.OK);
     }
 
     @PostMapping("/crear")
@@ -116,11 +116,11 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id")Long id){
+    public ResponseEntity<UsuarioModel> delete(@PathVariable("id")Long id){
         if(!usuarioService.existsById(id))
-            return new ResponseEntity<>(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         usuarioService.eliminarUsuario(id);
-        return new ResponseEntity<>(new MensajeModel("Hotel eliminado"), HttpStatus.OK);
+        return new ResponseEntity(new MensajeModel("Hotel eliminado"), HttpStatus.OK);
     }
     //   @Get
 //    @GetMapping()
