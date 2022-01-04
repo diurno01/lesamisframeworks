@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ReservasVuelos")
-public class ReservaVuelaModel {
+public class ReservaVueloModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
@@ -20,9 +20,9 @@ public class ReservaVuelaModel {
     @OneToOne
     private SucursalModel sucursalModel;
 
-    public ReservaVuelaModel(){};
+    public ReservaVueloModel(){};
 
-    public ReservaVuelaModel(UsuarioModel usuario, VueloModel vuelo, ClaseVuelo clase, SucursalModel sucursalModel) {
+    public ReservaVueloModel(UsuarioModel usuario, VueloModel vuelo, ClaseVuelo clase, SucursalModel sucursalModel) {
         this.usuario = usuario;
         this.vuelo = vuelo;
         this.clase = clase;
