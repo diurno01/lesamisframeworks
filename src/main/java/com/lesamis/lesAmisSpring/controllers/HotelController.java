@@ -45,7 +45,7 @@ public class HotelController {
         return new ResponseEntity(hotel, HttpStatus.OK);
     }
 
-    @GetMapping("/detalle/{nombre}")
+    @GetMapping("/detalleNombre/{nombre}")
     public ResponseEntity<HotelModel> obtenerPorNombre(@PathVariable("nombre") String nombre){
         if(!hotelService.existsByNombre(nombre))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
