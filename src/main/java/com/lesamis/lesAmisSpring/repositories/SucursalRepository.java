@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface SucursalRepository extends JpaRepository<SucursalModel, Long> {
-    Optional<SucursalModel> findByIdAgencia(Long idAgencia);
+    Optional<SucursalModel> findByAgencia_Id(Long idAgencia);
     boolean existsByAgencia_Id(Long agencia);
 }

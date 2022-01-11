@@ -21,7 +21,7 @@ public class SucursalService {
     }
 
     public Optional<SucursalModel> obtenerSucursalesPorId(Long id){
-        return sucursalRepository.findByIdAgencia(id);
+        return sucursalRepository.findByAgencia_Id(id);
     }
 
     public Optional<SucursalModel> obtenerSucursalPorId(Long id){
@@ -29,7 +29,7 @@ public class SucursalService {
     }
 
     public Optional<SucursalModel> findByIdAgencia(Long idAgencia){
-        return sucursalRepository.findByIdAgencia(idAgencia);
+        return sucursalRepository.findByAgencia_Id(idAgencia);
     }
 
     public void agregarSucursal(SucursalModel sucursal){
