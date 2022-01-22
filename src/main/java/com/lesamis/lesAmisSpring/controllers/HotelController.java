@@ -105,8 +105,8 @@ public class HotelController {
             return new ResponseEntity(new MensajeModel("El precio de la pension completa debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(hotel.getPrecioMediaPension() > hotel.getPrecioPensionCompleta() )
             return new ResponseEntity(new MensajeModel("El precio de la pension completa tiene que ser superior al de la pension media"), HttpStatus.BAD_REQUEST);
-        if(hotelService.existsByNombre(hotel.getNombre()))
-            return new ResponseEntity(new MensajeModel("El nombre del hotel ya existe"), HttpStatus.BAD_REQUEST);
+//        if(hotelService.existsByNombre(hotel.getNombre()))
+//            return new ResponseEntity(new MensajeModel("El nombre del hotel ya existe"), HttpStatus.BAD_REQUEST);
 
         HotelModel hotelModel = hotelService.obtenerHotelPorId(id).get();
         hotelModel.setNombre(hotel.getNombre());
