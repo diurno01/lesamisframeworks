@@ -1,4 +1,5 @@
 package com.lesamis.lesAmisSpring.security.enums;
 
-public class RolNombre {
+public enum RolNombre {
+    ROLE_ADMIN, ROL_VENDEDOR, ROL_CLIENTE;
 }
