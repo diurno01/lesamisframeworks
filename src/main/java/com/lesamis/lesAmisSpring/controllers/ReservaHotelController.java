@@ -36,7 +36,7 @@ public class ReservaHotelController {
 
     @PostMapping("/crear")
     public ResponseEntity<ReservaHotelModel> create(@RequestBody ReservaHotelModel reserva){
-        if(StringUtils.isBlank(reserva.getUsuario().toString()))
+        if(StringUtils.isBlank(reserva.getIdUsuario().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el usuario de la reserva"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(reserva.getHotel().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar Hotel de la reserva"), HttpStatus.BAD_REQUEST);
@@ -45,7 +45,7 @@ public class ReservaHotelController {
         if(StringUtils.isBlank(reserva.getSucursal().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar la sucursal de la reserva"), HttpStatus.BAD_REQUEST);
 
-        ReservaHotelModel reservaHotelModel = new ReservaHotelModel(reserva.getUsuario(),
+        ReservaHotelModel reservaHotelModel = new ReservaHotelModel(reserva.getIdUsuario(),
                 reserva.getHotel(),
                 reserva.getPension(),
                 reserva.getSucursal());
@@ -57,7 +57,7 @@ public class ReservaHotelController {
     public ResponseEntity<ReservaHotelModel> update(@PathVariable("id")Long id, @RequestBody ReservaHotelModel reserva){
         if(!reservaHotelService.existsById(id))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
-        if(StringUtils.isBlank(reserva.getUsuario().toString()))
+        if(StringUtils.isBlank(reserva.getIdUsuario().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el usuario de la reserva"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(reserva.getHotel().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar Hotel de la reserva"), HttpStatus.BAD_REQUEST);
@@ -67,7 +67,7 @@ public class ReservaHotelController {
             return new ResponseEntity(new MensajeModel("Olvido competar la sucursal de la reserva"), HttpStatus.BAD_REQUEST);
 
         ReservaHotelModel reservaHotelModel = reservaHotelService.obtenerReservaHotelPorId(id).get();
-        reservaHotelModel.setUsuario(reserva.getUsuario());
+        reservaHotelModel.setIdUsuario(reserva.getIdUsuario());
         reservaHotelModel.setHotel(reserva.getHotel());
         reservaHotelModel.setPension(reserva.getPension());
         reservaHotelModel.setSucursal(reserva.getSucursal());

@@ -1,6 +1,5 @@
 package com.lesamis.lesAmisSpring.services;
 
-import com.lesamis.lesAmisSpring.models.HotelModel;
 import com.lesamis.lesAmisSpring.models.ReservaHotelModel;
 import com.lesamis.lesAmisSpring.repositories.ReservaHotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class ReservaHotelService {
     }
 
     public Optional<ReservaHotelModel> obtenerReservasHotelPorUsuario(Long id){
-        return reservaHotelRepository.findByUsuario_Id(id);
+        return reservaHotelRepository.findByIdUsuario(id);
     }
 
     public void agregarReservaHotel(ReservaHotelModel reserva){

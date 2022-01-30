@@ -1,5 +1,7 @@
 package com.lesamis.lesAmisSpring.models;
 
+import com.lesamis.lesAmisSpring.security.models.Usuario;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,8 +12,7 @@ public class ReservaVueloModel {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    @OneToOne
-    private UsuarioModel usuario;
+    private Long idUsuario;
 
     @OneToOne
     private VueloModel vuelo;
@@ -22,8 +23,8 @@ public class ReservaVueloModel {
 
     public ReservaVueloModel(){};
 
-    public ReservaVueloModel(UsuarioModel usuario, VueloModel vuelo, ClaseVuelo clase, SucursalModel sucursalModel) {
-        this.usuario = usuario;
+    public ReservaVueloModel(Long idUsuario, VueloModel vuelo, ClaseVuelo clase, SucursalModel sucursalModel) {
+        this.idUsuario = idUsuario;
         this.vuelo = vuelo;
         this.clase = clase;
         this.sucursalModel = sucursalModel;
@@ -37,12 +38,12 @@ public class ReservaVueloModel {
         this.id = id;
     }
 
-    public UsuarioModel getUsuario() {
-        return usuario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsuario(UsuarioModel usuario) {
-        this.usuario = usuario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public VueloModel getVuelo() {

@@ -38,7 +38,7 @@ public class ReservaVueloController {
 
     @PostMapping("/crear")
     public ResponseEntity<ReservaVueloModel> create(@RequestBody ReservaVueloModel reserva){
-        if(StringUtils.isBlank(reserva.getUsuario().toString()))
+        if(StringUtils.isBlank(reserva.getIdUsuario().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el usuario de la reserva"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(reserva.getVuelo().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar vuelo de la reserva"), HttpStatus.BAD_REQUEST);
@@ -47,7 +47,7 @@ public class ReservaVueloController {
         if(StringUtils.isBlank(reserva.getSucursalModel().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar la sucursal de la reserva"), HttpStatus.BAD_REQUEST);
 
-        ReservaVueloModel reservaVueloModel = new ReservaVueloModel(reserva.getUsuario(),
+        ReservaVueloModel reservaVueloModel = new ReservaVueloModel(reserva.getIdUsuario(),
                 reserva.getVuelo(),
                 reserva.getClase(),
                 reserva.getSucursalModel());
@@ -67,7 +67,7 @@ public class ReservaVueloController {
             return new ResponseEntity(new MensajeModel("Olvido competar la sucursal de la reserva"), HttpStatus.BAD_REQUEST);
 
         ReservaVueloModel reservaVueloModel = reservaVueloService.obtenerReservaVueloPorId(id).get();
-        reservaVueloModel.setUsuario(reserva.getUsuario());
+        reservaVueloModel.setIdUsuario(reserva.getIdUsuario());
         reservaVueloModel.setVuelo(reserva.getVuelo());
         reservaVueloModel.setClase(reserva.getClase());
         reservaVueloModel.setSucursalModel(reserva.getSucursalModel());

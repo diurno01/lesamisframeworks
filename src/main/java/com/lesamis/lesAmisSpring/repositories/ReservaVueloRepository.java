@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ReservaVueloRepository extends JpaRepository<ReservaVueloModel, Long> {
-    Optional<ReservaVueloModel> findByUsuario_Id(Long id);
+    Optional<ReservaVueloModel> findByIdUsuario(Long id);
 }

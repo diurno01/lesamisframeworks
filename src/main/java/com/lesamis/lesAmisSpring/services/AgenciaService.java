@@ -1,14 +1,10 @@
 package com.lesamis.lesAmisSpring.services;
 
 import com.lesamis.lesAmisSpring.models.AgenciaModel;
-import com.lesamis.lesAmisSpring.models.SucursalModel;
-import com.lesamis.lesAmisSpring.models.UsuarioModel;
 import com.lesamis.lesAmisSpring.repositories.AgenciaRepository;
-import com.lesamis.lesAmisSpring.repositories.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

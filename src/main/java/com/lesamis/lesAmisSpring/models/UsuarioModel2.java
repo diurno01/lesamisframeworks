@@ -3,13 +3,13 @@ package com.lesamis.lesAmisSpring.models;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "usuarios")
-public class UsuarioModel {
+//@Entity
+//@Table(name = "usuarios")
+public class UsuarioModel2 {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(unique = true, nullable = false)
     private Long id;
 
     private String usuario;
@@ -22,9 +22,9 @@ public class UsuarioModel {
     private String email;
     private Tipo tipo;
 
-    public UsuarioModel(){}
+    public UsuarioModel2(){}
 
-    public UsuarioModel(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, Tipo tipo) {
+    public UsuarioModel2(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, Tipo tipo) {
         this.usuario = usuario;
         this.password = password;
         this.dni = dni;
