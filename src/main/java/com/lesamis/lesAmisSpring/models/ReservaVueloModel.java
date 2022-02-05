@@ -1,6 +1,6 @@
 package com.lesamis.lesAmisSpring.models;
 
-import com.lesamis.lesAmisSpring.security.models.Usuario;
+
 
 import javax.persistence.*;
 

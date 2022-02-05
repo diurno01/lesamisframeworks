@@ -1,45 +1,31 @@
-package com.lesamis.lesAmisSpring.security.models;
+package com.lesamis.lesAmisSpring.models;
 
-import com.lesamis.lesAmisSpring.models.Tipo;
-import com.sun.istack.NotNull;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
-public class Usuario {
+@Entity
+@Table(name = "usuarios")
+public class UsuarioModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
-    @NotNull
-    @Column(unique = true)
-    private String nombreUsuario;
-    @NotNull
+
+    private String usuario;
     private String password;
-    @NotNull
     private Long dni;
-    @NotNull
     private String nombre;
-    @NotNull
     private String apellido;
-    @NotNull
     private String direccion;
-    @NotNull
     private String telefono;
-    @NotNull
     private String email;
-    @ManyToMany
-    @JoinTable(name = "usuario_rol",joinColumns = @JoinColumn(name = "usuario_id"),
-    inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Rol> roles = new HashSet<>();
+    private Tipo tipo;
 
-    public Usuario() {
-    }
+    public UsuarioModel(){}
 
-    public Usuario(String nombreUsuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email) {
-        this.nombreUsuario = nombreUsuario;
+    public UsuarioModel(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, Tipo tipo) {
+        this.usuario = usuario;
         this.password = password;
         this.dni = dni;
         this.nombre = nombre;
@@ -47,6 +33,7 @@ public class Usuario {
         this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
+        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -57,12 +44,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getPassword() {
@@ -121,11 +108,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public Set<Rol> getRoles() {
-        return roles;
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setRoles(Set<Rol> roles) {
-        this.roles = roles;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 }
