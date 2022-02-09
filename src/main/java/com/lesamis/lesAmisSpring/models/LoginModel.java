@@ -1,5 +1,6 @@
 package com.lesamis.lesAmisSpring.models;
 
+
 import javax.persistence.*;
 
 @Entity

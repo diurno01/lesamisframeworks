@@ -17,6 +17,11 @@ public class LoginService {
         return loginRepository.findByUsuarioAndPassword(usuario,password);
     }
 
+    public Optional<UsuarioModel> login(String usuario){
+        return loginRepository.findByUsuario(usuario);
+    }
+
+
     public boolean existByUsuarioAndPassword(String usuario, String password){
         return loginRepository.existsByUsuarioAndPassword(usuario, password);
     }
