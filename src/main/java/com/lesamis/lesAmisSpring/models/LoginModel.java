@@ -1,26 +1,24 @@
 package com.lesamis.lesAmisSpring.models;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "login")
+@AllArgsConstructor
+@Data
+@NoArgsConstructor
 public class LoginModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String nombreUsuario;
+    String usuario;
     String password;
-
-    public LoginModel() {
-    }
-
-    public LoginModel(Long id, String nombreUsuario, String password) {
-        this.id = id;
-        this.nombreUsuario = nombreUsuario;
-        this.password = password;
-    }
 
     public Long getId() {
         return id;
@@ -30,12 +28,12 @@ public class LoginModel {
         this.id = id;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setUsuario(String nombreUsuario) {
+        this.usuario = nombreUsuario;
     }
 
     public String getPassword() {

@@ -20,11 +20,11 @@ public class UsuarioModel {
     private String direccion;
     private String telefono;
     private String email;
-    private Tipo tipo;
+    private String tipo;
 
     public UsuarioModel(){}
 
-    public UsuarioModel(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, Tipo tipo) {
+    public UsuarioModel(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, String tipo) {
         this.usuario = usuario;
         this.password = password;
         this.dni = dni;
@@ -108,11 +108,11 @@ public class UsuarioModel {
         this.email = email;
     }
 
-    public Tipo getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 }

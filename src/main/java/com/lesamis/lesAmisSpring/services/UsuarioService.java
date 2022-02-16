@@ -1,6 +1,5 @@
 package com.lesamis.lesAmisSpring.services;
 
-import com.lesamis.lesAmisSpring.models.Tipo;
 import com.lesamis.lesAmisSpring.models.UsuarioModel;
 import com.lesamis.lesAmisSpring.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +26,11 @@ public class UsuarioService {
         return usuarioRepository.findByDni(dni);
     }
 
-    public Optional<UsuarioModel> obtenerPorUsuario(String usuario) {
+    public Optional<UsuarioModel> obtenerPorUsuario(java.lang.String usuario) {
         return usuarioRepository.findByUsuario(usuario);
     }
 
-    public Optional<UsuarioModel> obtenerUsuariosPorTipo(Tipo Tipo) {
+    public Optional<UsuarioModel> obtenerUsuariosPorTipo(String Tipo) {
         return usuarioRepository.findByTipo(Tipo);
     }
 
@@ -47,12 +46,21 @@ public class UsuarioService {
     public boolean existsByDni(Long dni){
         return usuarioRepository.existsByDni(dni);
     }
-    public boolean existsByUsuario(String usuario){
+
+    public boolean existsByUsuario(java.lang.String usuario){
         return usuarioRepository.existsByUsuario(usuario);
     }
 
     public void eliminarUsuario(Long id){
         usuarioRepository.deleteById(id);
+    }
+
+    public Optional<UsuarioModel> login(String usuario, String password){
+        return usuarioRepository.findByUsuarioAndPassword(usuario,password);
+    }
+
+    public boolean existByUsuarioAndPassword(String usuario, String password){
+        return usuarioRepository.existsByUsuarioAndPassword(usuario, password);
     }
 //    public boolean eliminarUsuario(Long id) {
 //        try {
