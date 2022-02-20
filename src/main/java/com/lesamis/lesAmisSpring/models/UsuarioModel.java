@@ -20,11 +20,12 @@ public class UsuarioModel {
     private String direccion;
     private String telefono;
     private String email;
+    private String sucursal;
     private String tipo;
 
     public UsuarioModel(){}
 
-    public UsuarioModel(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, String tipo) {
+    public UsuarioModel(String usuario, String password, Long dni, String nombre, String apellido, String direccion, String telefono, String email, String sucursal, String tipo) {
         this.usuario = usuario;
         this.password = password;
         this.dni = dni;
@@ -33,6 +34,7 @@ public class UsuarioModel {
         this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
+        this.sucursal = sucursal;
         this.tipo = tipo;
     }
 
@@ -106,6 +108,14 @@ public class UsuarioModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
     }
 
     public String getTipo() {

@@ -1,6 +1,7 @@
 package com.lesamis.lesAmisSpring.controllers;
 
 
+import com.lesamis.lesAmisSpring.models.HotelModel;
 import com.lesamis.lesAmisSpring.models.MensajeModel;
 import com.lesamis.lesAmisSpring.models.UsuarioModel;
 import com.lesamis.lesAmisSpring.services.UsuarioService;
@@ -43,7 +44,7 @@ public class UsuarioController {
 
     @PostMapping("/crear")
     public ResponseEntity<UsuarioModel> create(@RequestBody UsuarioModel usuario){
-        if(!usuarioService.existsByUsuario(usuario.getUsuario()))
+        if(usuarioService.existsByUsuario(usuario.getUsuario()))
             return new ResponseEntity(new MensajeModel("Este usuario ya existe"), HttpStatus.NOT_FOUND);
         if(StringUtils.isBlank(usuario.getUsuario()))
             return new ResponseEntity(new MensajeModel("Olvido competar el Login del usuario"), HttpStatus.BAD_REQUEST);
@@ -59,6 +60,8 @@ public class UsuarioController {
             return new ResponseEntity(new MensajeModel("Olvido competar el Telefono del usuario"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(usuario.getEmail()))
             return new ResponseEntity(new MensajeModel("Olvido competar el Email del usuario"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(usuario.getSucursal()))
+            return new ResponseEntity(new MensajeModel("Olvido competar la Sucursal del usuario"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(usuario.getTipo().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el Tipo de usuario"), HttpStatus.BAD_REQUEST);
 
@@ -70,6 +73,7 @@ public class UsuarioController {
                 usuario.getDireccion(),
                 usuario.getTelefono(),
                 usuario.getEmail(),
+                usuario.getSucursal(),
                 usuario.getTipo());
         usuarioService.agregarUsuario(usuarioModel);
         return new ResponseEntity(new MensajeModel("El usuario ha sido registrado exitosamente") , HttpStatus.OK);
@@ -97,6 +101,8 @@ public class UsuarioController {
             return new ResponseEntity(new MensajeModel("Olvido competar el Telefono del usuario"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(usuario.getEmail()))
             return new ResponseEntity(new MensajeModel("Olvido competar el Email del usuario"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(usuario.getSucursal()))
+            return new ResponseEntity(new MensajeModel("Olvido competar la sucursal del usuario"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(usuario.getTipo().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el Tipo de usuario"), HttpStatus.BAD_REQUEST);
 
@@ -109,6 +115,7 @@ public class UsuarioController {
         usuarioModel.setDireccion(usuario.getDireccion());
         usuarioModel.setTelefono(usuario.getTelefono());
         usuarioModel.setEmail(usuario.getEmail());
+        usuarioModel.setSucursal(usuario.getSucursal());
         usuarioModel.setTipo(usuario.getTipo());
 
         usuarioService.agregarUsuario(usuarioModel);

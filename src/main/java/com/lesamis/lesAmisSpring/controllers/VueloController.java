@@ -42,13 +42,13 @@ public class VueloController {
         return new ResponseEntity(vuelo, HttpStatus.OK);
     }
 
-    @GetMapping("/detalle/{nombre}")
-    public ResponseEntity<HotelModel> obtenerPorNumeroDeVuelo(@PathVariable("nombre") Long numeroDeVuelo){
-        if(!vueloService.existsByNumeroDeVuelo(numeroDeVuelo))
-            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
-        VueloModel vuelo = vueloService.obtenerVueloPorId(numeroDeVuelo).get();
-        return new ResponseEntity(vuelo, HttpStatus.OK);
-    }
+//    @GetMapping("/detalle/{nombre}")
+//    public ResponseEntity<HotelModel> obtenerPorNumeroDeVuelo(@PathVariable("nombre") Long numeroDeVuelo){
+//        if(!vueloService.existsByNumeroDeVuelo(numeroDeVuelo))
+//            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+//        VueloModel vuelo = vueloService.obtenerVueloPorId(numeroDeVuelo).get();
+//        return new ResponseEntity(vuelo, HttpStatus.OK);
+//    }
 
     @PostMapping("/crear")
     public ResponseEntity<VueloModel> create(@RequestBody VueloModel vuelo){
