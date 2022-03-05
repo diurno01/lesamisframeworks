@@ -1,11 +1,23 @@
 package com.lesamis.lesAmisSpring.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
 @Table(name = "vuelos")
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class VueloModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +25,12 @@ public class VueloModel {
     private Long id;
 
     private Long numeroDeVuelo;
-    private Date fechaYHora;
+//    @Temporal(TemporalType.DATE)
+//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
+//     @JsonSerialize(using = DateSerializer.class)
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechaYHora;
     private String origen;
     private String destino;
     private Integer plazasPrimeraClase;
@@ -23,7 +40,7 @@ public class VueloModel {
 
     public VueloModel(){};
 
-    public VueloModel(Long numeroDeVuelo, Date fechaYHora, String origen, String destino, Integer plazasPrimeraClase, Integer plazasClaseTurista, Float precioPrimeraClase, Float precioClaseturista) {
+    public VueloModel(Long numeroDeVuelo, LocalDate fechaYHora, String origen, String destino, Integer plazasPrimeraClase, Integer plazasClaseTurista, Float precioPrimeraClase, Float precioClaseturista) {
         this.numeroDeVuelo = numeroDeVuelo;
         this.fechaYHora = fechaYHora;
         this.origen = origen;
@@ -50,11 +67,11 @@ public class VueloModel {
         this.numeroDeVuelo = numeroDeVuelo;
     }
 
-    public Date getFechaYHora() {
+    public LocalDate getFechaYHora() {
         return fechaYHora;
     }
 
-    public void setFechaYHora(Date fechaYHora) {
+    public void setFechaYHora(LocalDate fechaYHora) {
         this.fechaYHora = fechaYHora;
     }
 
