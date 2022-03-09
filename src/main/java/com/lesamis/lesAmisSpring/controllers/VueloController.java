@@ -90,7 +90,7 @@ public class VueloController {
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         if(StringUtils.isBlank(vuelo.getNumeroDeVuelo().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el numero de vuelo"), HttpStatus.BAD_REQUEST);
-        if(vueloService.existsByNumeroDeVuelo(vuelo.getNumeroDeVuelo()))// revisar, hay verificar que no haya otro vuelo con el mismo numero
+        if(!vueloService.findByNumeroDeVuelo(vuelo.getNumeroDeVuelo()).get().getId().equals(vuelo.getId()))// revisar, hay verificar que no haya otro vuelo con el mismo numero
             return new ResponseEntity(new MensajeModel("Ese numero de vuelo ya existe ya existe"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(vuelo.getFechaYHora().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar la hora y fecha del vuelo"), HttpStatus.BAD_REQUEST);
@@ -108,8 +108,7 @@ public class VueloController {
             return new ResponseEntity(new MensajeModel("El precio de clase turista debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(vuelo.getPrecioClaseturista() > vuelo.getPrecioPrimeraClase() )
             return new ResponseEntity(new MensajeModel("El precio de primeraclase tiene que ser superior al de la clase turista"), HttpStatus.BAD_REQUEST);
-        if(vueloService.existsByNumeroDeVuelo(vuelo.getNumeroDeVuelo()))
-            return new ResponseEntity(new MensajeModel("El numero de vuelo ya existe"), HttpStatus.BAD_REQUEST);
+
 
         VueloModel vueloModel = vueloService.obtenerVueloPorId(id).get();
         vueloModel.setNumeroDeVuelo(vuelo.getNumeroDeVuelo());

@@ -20,17 +20,17 @@ public class SucursalService {
         return sucursalRepository.findAll();
     }
 
-    public Optional<SucursalModel> obtenerSucursalesPorId(Long id){
-        return sucursalRepository.findByAgencia_Id(id);
-    }
+//    public Optional<SucursalModel> obtenerSucursalesPorId(Long id){
+//        return sucursalRepository.findByAgencia_Id(id);
+//    }
 
     public Optional<SucursalModel> obtenerSucursalPorId(Long id){
         return sucursalRepository.findById(id);
     }
 
-    public Optional<SucursalModel> findByIdAgencia(Long idAgencia){
-        return sucursalRepository.findByAgencia_Id(idAgencia);
-    }
+//    public Optional<SucursalModel> findByIdAgencia(Long idAgencia){
+//        return sucursalRepository.findByAgencia_Id(idAgencia);
+//    }
 
     public void agregarSucursal(SucursalModel sucursal){
         sucursalRepository.save(sucursal);
@@ -43,29 +43,10 @@ public class SucursalService {
     public boolean existsById(Long id){
         return sucursalRepository.existsById(id);
     }
+//
+//    public boolean existsByIdAgencia(Long id){
+//        return sucursalRepository.existsByAgencia_Id(id);
+//    }
 
-    public boolean existsByIdAgencia(Long id){
-        return sucursalRepository.existsByAgencia_Id(id);
-    }
 
-//    public ArrayList<SucursalModel> obtenerSucursales(){
-//        return (ArrayList<SucursalModel>) sucursalRepository.findAll();
-//    }
-//
-//    public SucursalModel agregarSucursal(SucursalModel sucursal){
-//        return sucursalRepository.save(sucursal);
-//    }
-//
-//    public Optional<SucursalModel> obtenerSucursalPorId(Long id){
-//        return sucursalRepository.findById(id);
-//    }
-//
-//    public boolean eliminarSucursal(Long id) {
-//        try{
-//            sucursalRepository.deleteById(id);
-//            return true;
-//        }catch(Exception err){
-//            return false;
-//        }
-//    }
 }

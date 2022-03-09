@@ -34,13 +34,13 @@ public class SucursalController {
         SucursalModel sucursal = sucursalService.obtenerSucursalPorId(id).get();
         return new ResponseEntity(sucursal, HttpStatus.OK);
     }
-    @GetMapping("/detalle/agencia/{id}")
-    public ResponseEntity<SucursalModel> obtenerSucursalesPorAgencia(@PathVariable("idAgencia") Long idAgencia){
-        if(!sucursalService.existsByIdAgencia(idAgencia))
-            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
-        SucursalModel sucursal = sucursalService.obtenerSucursalesPorId(idAgencia).get();
-        return new ResponseEntity(sucursal, HttpStatus.OK);
-    }
+//    @GetMapping("/detalle/agencia/{id}")
+//    public ResponseEntity<SucursalModel> obtenerSucursalesPorAgencia(@PathVariable("idAgencia") Long idAgencia){
+//        if(!sucursalService.existsByIdAgencia(idAgencia))
+//            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+//        SucursalModel sucursal = sucursalService.obtenerSucursalesPorId(idAgencia).get();
+//        return new ResponseEntity(sucursal, HttpStatus.OK);
+//    }
 
 //    @GetMapping("/detalle/{nombre}")
 //    public ResponseEntity<SucursalModel> obtenerPorCodigo(@PathVariable("nombre") Long numeroDeVuelo){
@@ -58,13 +58,11 @@ public class SucursalController {
             return new ResponseEntity(new MensajeModel("Olvido competar la direccion de la sucursal"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(sucursal.getTelefono()))
             return new ResponseEntity(new MensajeModel("Olvido competar el telefono de la sucursal"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(sucursal.getAgencia().toString()))
-            return new ResponseEntity(new MensajeModel("Olvido competar la agencia de la sucursal"), HttpStatus.BAD_REQUEST);
+
 
         SucursalModel sucursalModel = new SucursalModel(sucursal.getCodigo(),
                 sucursal.getDireccion(),
-                sucursal.getTelefono(),
-                sucursal.getAgencia());
+                sucursal.getTelefono());
         sucursalService.agregarSucursal(sucursalModel);
         return new ResponseEntity(new MensajeModel("La sucursal ha sido registrado exitosamente") , HttpStatus.OK);
     }
@@ -79,14 +77,13 @@ public class SucursalController {
             return new ResponseEntity(new MensajeModel("Olvido competar la direccion de la sucursal"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(sucursal.getTelefono()))
             return new ResponseEntity(new MensajeModel("Olvido competar el telefono de la sucursal"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(sucursal.getAgencia().toString()))
-            return new ResponseEntity(new MensajeModel("Olvido competar la agencia de la sucursal"), HttpStatus.BAD_REQUEST);
+
+
 
         SucursalModel sucursalModel = sucursalService.obtenerSucursalPorId(id).get();
         sucursalModel.setCodigo(sucursal.getCodigo());
         sucursalModel.setDireccion(sucursal.getDireccion());
         sucursalModel.setTelefono(sucursal.getTelefono());
-        sucursalModel.setAgencia(sucursal.getAgencia());
 
         sucursalService.agregarSucursal(sucursalModel);
         return new ResponseEntity(new MensajeModel("Sucursal actualizada exitosamente"), HttpStatus.OK);
@@ -102,28 +99,4 @@ public class SucursalController {
     }
 
 
-//    @GetMapping()
-//    public ArrayList<SucursalModel> obtenerSucursales(){
-//        return sucursalService.obtenerSucursales();
-//    }
-//
-//    @PostMapping()
-//    public SucursalModel guardarSucursal(@RequestBody SucursalModel sucursal){
-//        return this.sucursalService.agregarSucursal(sucursal);
-//    }
-//
-//    @GetMapping( path = "/{id}")
-//    public Optional<SucursalModel> obtenerSucursalPorId(@PathVariable("id") Long id) {
-//        return this.sucursalService.obtenerSucursalPorId(id);
-//    }
-//
-//    @DeleteMapping( path = "/{id}")
-//    public String eliminarSucursalPorId(@PathVariable("id") Long id){
-//        boolean ok = this.sucursalService.eliminarSucursal(id);
-//        if (ok){
-//            return "Se eliminó el sucursal con id " + id;
-//        }else{
-//            return "No pudo eliminar el sucursal con id" + id;
-//        }
-//    }
 }

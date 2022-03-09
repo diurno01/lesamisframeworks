@@ -13,16 +13,14 @@ public class SucursalModel {
     private String codigo;
     private String direccion;
     private String telefono;
-    @OneToOne
-    private AgenciaModel agencia;
 
     public SucursalModel(){};
 
-    public SucursalModel(String codigo, String direccion, String telefono, AgenciaModel agencia) {
+    public SucursalModel(String codigo, String direccion, String telefono) {
         this.codigo = codigo;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.agencia = agencia;
+
     }
 
     public Long getId() {
@@ -57,11 +55,5 @@ public class SucursalModel {
         this.telefono = telefono;
     }
 
-    public AgenciaModel getAgencia() {
-        return agencia;
-    }
 
-    public void setAgencia(AgenciaModel agencia) {
-        this.agencia = agencia;
-    }
 }

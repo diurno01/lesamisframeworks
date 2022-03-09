@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "login")
-@AllArgsConstructor
 @Data
 @NoArgsConstructor
 public class LoginModel {

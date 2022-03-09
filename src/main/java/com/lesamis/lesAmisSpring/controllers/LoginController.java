@@ -28,20 +28,5 @@ public class LoginController {
         return new ResponseEntity(user, HttpStatus.OK);
     }
 
-//    @PostMapping("/post")
-//    public ResponseEntity<?> loginUsuario(@RequestBody LoginModel loginModel){
-//        if(!loginService.existByUsuarioAndPassword(loginModel.getUsuario(), loginModel.getPassword()))
-//            return new ResponseEntity(new MensajeModel("Este usuario no existe, vuelva a intentar."), HttpStatus.NOT_FOUND);
-//        UsuarioModel usuario = loginService.login(loginModel.getUsuario(), loginModel.getPassword()).get();
-//        return new ResponseEntity(usuario, HttpStatus.OK);
-//    }
-//    @PostMapping("")
-//    public ResponseEntity<?> loginUser(@RequestBody LoginModel loginModel){
-//        System.out.println(loginModel.getUsuario()+" "+loginModel.getPassword());
-//        UsuarioModel usuarioModel = usuarioService.login(loginModel.getUsuario());
-//            if(usuarioModel.getPassword().equals(loginModel.getPassword()))
-//                 return ResponseEntity.ok(usuarioModel);
-//            return  (ResponseEntity<?>) ResponseEntity.internalServerError();
-//    }
 
 }

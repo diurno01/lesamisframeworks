@@ -11,6 +11,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,7 +31,8 @@ public class VueloModel {
 //     @JsonDeserialize(using = DateDeserializers.DateDeserializer.class)
 //     @JsonSerialize(using = DateSerializer.class)
 //    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate fechaYHora;
+
+    private LocalDateTime fechaYHora;
     private String origen;
     private String destino;
     private Integer plazasPrimeraClase;
@@ -40,7 +42,7 @@ public class VueloModel {
 
     public VueloModel(){};
 
-    public VueloModel(Long numeroDeVuelo, LocalDate fechaYHora, String origen, String destino, Integer plazasPrimeraClase, Integer plazasClaseTurista, Float precioPrimeraClase, Float precioClaseturista) {
+    public VueloModel(Long numeroDeVuelo, LocalDateTime fechaYHora, String origen, String destino, Integer plazasPrimeraClase, Integer plazasClaseTurista, Float precioPrimeraClase, Float precioClaseturista) {
         this.numeroDeVuelo = numeroDeVuelo;
         this.fechaYHora = fechaYHora;
         this.origen = origen;
@@ -67,11 +69,11 @@ public class VueloModel {
         this.numeroDeVuelo = numeroDeVuelo;
     }
 
-    public LocalDate getFechaYHora() {
+    public LocalDateTime getFechaYHora() {
         return fechaYHora;
     }
 
-    public void setFechaYHora(LocalDate fechaYHora) {
+    public void setFechaYHora(LocalDateTime fechaYHora) {
         this.fechaYHora = fechaYHora;
     }
 
