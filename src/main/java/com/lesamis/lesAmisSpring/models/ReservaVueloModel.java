@@ -13,21 +13,17 @@ public class ReservaVueloModel {
     private Long id;
 
     private Long idUsuario;
-
-    @OneToOne
-    private VueloModel vuelo;
-    private ClaseVuelo clase;
-
-    @OneToOne
-    private SucursalModel sucursalModel;
+    private Long idVuelo;
+    private String clase;
+    private Long idSucursal;
 
     public ReservaVueloModel(){};
 
-    public ReservaVueloModel(Long idUsuario, VueloModel vuelo, ClaseVuelo clase, SucursalModel sucursalModel) {
+    public ReservaVueloModel(Long idUsuario, Long idVuelo, String clase, Long idSucursal) {
         this.idUsuario = idUsuario;
-        this.vuelo = vuelo;
+        this.idVuelo = idVuelo;
         this.clase = clase;
-        this.sucursalModel = sucursalModel;
+        this.idSucursal = idSucursal;
     }
 
     public Long getId() {
@@ -46,27 +42,27 @@ public class ReservaVueloModel {
         this.idUsuario = idUsuario;
     }
 
-    public VueloModel getVuelo() {
-        return vuelo;
+    public Long getIdVuelo() {
+        return idVuelo;
     }
 
-    public void setVuelo(VueloModel vuelo) {
-        this.vuelo = vuelo;
+    public void setIdVuelo(Long idVuelo) {
+        this.idVuelo = idVuelo;
     }
 
-    public ClaseVuelo getClase() {
+    public String getClase() {
         return clase;
     }
 
-    public void setClase(ClaseVuelo clase) {
+    public void setClase(String clase) {
         this.clase = clase;
     }
 
-    public SucursalModel getSucursalModel() {
-        return sucursalModel;
+    public Long getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setSucursalModel(SucursalModel sucursalModel) {
-        this.sucursalModel = sucursalModel;
+    public void setIdSucursal(Long idSucursal) {
+        this.idSucursal = idSucursal;
     }
 }

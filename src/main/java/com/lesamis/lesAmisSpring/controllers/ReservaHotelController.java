@@ -38,17 +38,23 @@ public class ReservaHotelController {
     public ResponseEntity<ReservaHotelModel> create(@RequestBody ReservaHotelModel reserva){
         if(StringUtils.isBlank(reserva.getIdUsuario().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el usuario de la reserva"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(reserva.getHotel().toString()))
+        if(StringUtils.isBlank(reserva.getIdHotel().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar Hotel de la reserva"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(reserva.getPension().toString()))
+        if(StringUtils.isBlank(reserva.getPension()))
             return new ResponseEntity(new MensajeModel("Olvido competar la pension de la reserva"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(reserva.getSucursal().toString()))
+        if(StringUtils.isBlank(reserva.getIdSucursal().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar la sucursal de la reserva"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(reserva.getFechaDeIngreso().toString()))
+            return new ResponseEntity(new MensajeModel("Olvido competar la fecha de ingreso de la reserva"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(reserva.getFechaDeEgreso().toString()))
+            return new ResponseEntity(new MensajeModel("Olvido competar la fecha de egreso de la reserva"), HttpStatus.BAD_REQUEST);
 
         ReservaHotelModel reservaHotelModel = new ReservaHotelModel(reserva.getIdUsuario(),
-                reserva.getHotel(),
+                reserva.getIdHotel(),
                 reserva.getPension(),
-                reserva.getSucursal());
+                reserva.getIdSucursal(),
+                reserva.getFechaDeIngreso(),
+                reserva.getFechaDeEgreso());
         reservaHotelService.agregarReservaHotel(reservaHotelModel);
         return new ResponseEntity(new MensajeModel("La reserva del hotel ha sido registrada exitosamente") , HttpStatus.OK);
     }
@@ -59,18 +65,24 @@ public class ReservaHotelController {
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         if(StringUtils.isBlank(reserva.getIdUsuario().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el usuario de la reserva"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(reserva.getHotel().toString()))
+        if(StringUtils.isBlank(reserva.getIdHotel().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar Hotel de la reserva"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(reserva.getPension().toString()))
+        if(StringUtils.isBlank(reserva.getPension()))
             return new ResponseEntity(new MensajeModel("Olvido competar la pension de la reserva"), HttpStatus.BAD_REQUEST);
-        if(StringUtils.isBlank(reserva.getSucursal().toString()))
+        if(StringUtils.isBlank(reserva.getIdSucursal().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar la sucursal de la reserva"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(reserva.getFechaDeIngreso().toString()))
+            return new ResponseEntity(new MensajeModel("Olvido competar la fecha de ingreso de la reserva"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(reserva.getFechaDeEgreso().toString()))
+            return new ResponseEntity(new MensajeModel("Olvido competar la fecha de egreso de la reserva"), HttpStatus.BAD_REQUEST);
 
         ReservaHotelModel reservaHotelModel = reservaHotelService.obtenerReservaHotelPorId(id).get();
         reservaHotelModel.setIdUsuario(reserva.getIdUsuario());
-        reservaHotelModel.setHotel(reserva.getHotel());
+        reservaHotelModel.setIdHotel(reserva.getIdHotel());
         reservaHotelModel.setPension(reserva.getPension());
-        reservaHotelModel.setSucursal(reserva.getSucursal());
+        reservaHotelModel.setIdSucursal(reserva.getIdSucursal());
+        reservaHotelModel.setFechaDeIngreso(reserva.getFechaDeIngreso());
+        reservaHotelModel.setFechaDeEgreso(reserva.getFechaDeEgreso());
 
         reservaHotelService.agregarReservaHotel(reservaHotelModel);
         return new ResponseEntity(new MensajeModel("La reserva ha sido actualizada exitosamente"), HttpStatus.OK);

@@ -38,5 +38,8 @@ public class ReservaVueloService {
     public boolean existsById(Long id){
         return reservaVueloRepository.existsById(id);
     }
+    public boolean existsByIdUsuario(Long id){
+        return reservaVueloRepository.existsByIdUsuario(id);
+    }
 }
 

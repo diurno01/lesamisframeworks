@@ -2,6 +2,8 @@ package com.lesamis.lesAmisSpring.models;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ReservasHotel")
@@ -14,20 +16,22 @@ public class ReservaHotelModel {
 
     private Long idUsuario;
 
-    @OneToOne
-    private HotelModel hotel;
-    private Pension pension;
 
-    @OneToOne
-    private SucursalModel sucursal;
+    private Long idHotel;
+    private String pension;
+    private Long idSucursal;
+    private LocalDate fechaDeIngreso;
+    private LocalDate fechaDeEgreso;
 
     public ReservaHotelModel(){};
 
-    public ReservaHotelModel(Long idUsuario, HotelModel hotel, Pension pension, SucursalModel sucursal) {
+    public ReservaHotelModel(Long idUsuario, Long idHotel, String pension, Long idSucursal, LocalDate fechaDeIngreso, LocalDate fechaDeEgreso) {
         this.idUsuario = idUsuario;
-        this.hotel = hotel;
+        this.idHotel = idHotel;
         this.pension = pension;
-        this.sucursal = sucursal;
+        this.idSucursal = idSucursal;
+        this.fechaDeIngreso = fechaDeIngreso;
+        this.fechaDeEgreso = fechaDeEgreso;
     }
 
     public Long getId() {
@@ -46,27 +50,43 @@ public class ReservaHotelModel {
         this.idUsuario = idUsuario;
     }
 
-    public HotelModel getHotel() {
-        return hotel;
+    public Long getIdHotel() {
+        return idHotel;
     }
 
-    public void setHotel(HotelModel hotel) {
-        this.hotel = hotel;
+    public void setIdHotel(Long idHotel) {
+        this.idHotel = idHotel;
     }
 
-    public Pension getPension() {
+    public String getPension() {
         return pension;
     }
 
-    public void setPension(Pension pension) {
+    public void setPension(String pension) {
         this.pension = pension;
     }
 
-    public SucursalModel getSucursal() {
-        return sucursal;
+    public Long getIdSucursal() {
+        return idSucursal;
     }
 
-    public void setSucursal(SucursalModel sucursal) {
-        this.sucursal = sucursal;
+    public void setIdSucursal(Long idSucursal) {
+        this.idSucursal = idSucursal;
+    }
+
+    public LocalDate getFechaDeIngreso() {
+        return fechaDeIngreso;
+    }
+
+    public void setFechaDeIngreso(LocalDate fechaDeIngreso) {
+        this.fechaDeIngreso = fechaDeIngreso;
+    }
+
+    public LocalDate getFechaDeEgreso() {
+        return fechaDeEgreso;
+    }
+
+    public void setFechaDeEgreso(LocalDate fechaDeEgreso) {
+        this.fechaDeEgreso = fechaDeEgreso;
     }
 }
