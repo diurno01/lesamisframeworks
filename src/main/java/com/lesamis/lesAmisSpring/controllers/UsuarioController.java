@@ -3,6 +3,7 @@ package com.lesamis.lesAmisSpring.controllers;
 
 import com.lesamis.lesAmisSpring.models.HotelModel;
 import com.lesamis.lesAmisSpring.models.MensajeModel;
+import com.lesamis.lesAmisSpring.models.ReservaVueloModel;
 import com.lesamis.lesAmisSpring.models.UsuarioModel;
 import com.lesamis.lesAmisSpring.services.UsuarioService;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +32,12 @@ public class UsuarioController {
         if(!usuarioService.existsById(id))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
         UsuarioModel usuario = usuarioService.obtenerUsuarioPorId(id).get();
+        return new ResponseEntity(usuario, HttpStatus.OK);
+    }
+
+    @GetMapping("/tipo/{tipo}")
+    public ResponseEntity<UsuarioModel> obtenerUsuarioPorId(@PathVariable("tipo") String tipo){
+        UsuarioModel usuario = usuarioService.obtenerUsuariosPorTipo(tipo).get();
         return new ResponseEntity(usuario, HttpStatus.OK);
     }
 
@@ -131,39 +138,5 @@ public class UsuarioController {
     }
 
 
-
-
-
-
-    //   @Get
-//    @GetMapping()
-//    public List<UsuarioModel> obtenerUsuarios(){
-//        return usuarioService.obtenerUsuarios();
-//    }
-//
-//    @PostMapping()
-//    public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario){
-//        return this.usuarioService.guardarUsuario(usuario);
-//    }
-//
-//    @GetMapping( path = "/{id}")
-//    public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
-//        return this.usuarioService.obtenerUsuarioPorId(id);
-//    }
-//
-//    @GetMapping("/query")
-//    public Optional<UsuarioModel> obtenerUsuariosPorTipo(@RequestParam("tipo") Tipo tipo){
-//        return this.usuarioService.obtenerUsuariosPorTipo(tipo);
-//    }
-//
-//    @DeleteMapping( path = "/{id}")
-//    public String eliminarPorId(@PathVariable("id") Long id){
-//        boolean ok = this.usuarioService.eliminarUsuario(id);
-//        if (ok){
-//            return "Se eliminó el usuario con id " + id;
-//        }else{
-//            return "No pudo eliminar el usuario con id" + id;
-//        }
-//    }
 
 }

@@ -19,7 +19,6 @@ public class LoginController {
     UsuarioService usuarioService;
 
 
-
     @PostMapping("/check")
     public ResponseEntity<UsuarioModel> login(@RequestBody LoginModel loginModel){
         if(!usuarioService.existByUsuarioAndPassword(loginModel.getUsuario(), loginModel.getPassword()))

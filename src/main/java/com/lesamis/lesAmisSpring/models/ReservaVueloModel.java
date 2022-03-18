@@ -2,6 +2,8 @@ package com.lesamis.lesAmisSpring.models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,42 +14,26 @@ public class ReservaVueloModel {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    private Long idUsuario;
-    private Long idVuelo;
+
     private String clase;
-    private Long idSucursal;
+
+    @ManyToOne
+    private UsuarioModel usuario;
+
+    @ManyToOne
+    private VueloModel vuelo;
+
+    @ManyToOne
+    private SucursalModel sucursal;
+
 
     public ReservaVueloModel(){};
 
-    public ReservaVueloModel(Long idUsuario, Long idVuelo, String clase, Long idSucursal) {
-        this.idUsuario = idUsuario;
-        this.idVuelo = idVuelo;
+    public ReservaVueloModel(String clase, UsuarioModel usuario, VueloModel vuelo, SucursalModel sucursal) {
         this.clase = clase;
-        this.idSucursal = idSucursal;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Long getIdVuelo() {
-        return idVuelo;
-    }
-
-    public void setIdVuelo(Long idVuelo) {
-        this.idVuelo = idVuelo;
+        this.usuario = usuario;
+        this.vuelo = vuelo;
+        this.sucursal = sucursal;
     }
 
     public String getClase() {
@@ -58,11 +44,36 @@ public class ReservaVueloModel {
         this.clase = clase;
     }
 
-    public Long getIdSucursal() {
-        return idSucursal;
+    public VueloModel getVuelo() {
+        return vuelo;
     }
 
-    public void setIdSucursal(Long idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setVuelo(VueloModel vuelo) {
+        this.vuelo = vuelo;
     }
+
+    public SucursalModel getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(SucursalModel sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

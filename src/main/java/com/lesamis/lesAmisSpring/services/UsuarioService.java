@@ -1,6 +1,10 @@
 package com.lesamis.lesAmisSpring.services;
 
+import com.lesamis.lesAmisSpring.models.ReservaHotelModel;
+import com.lesamis.lesAmisSpring.models.ReservaVueloModel;
 import com.lesamis.lesAmisSpring.models.UsuarioModel;
+import com.lesamis.lesAmisSpring.repositories.ReservaHotelRepository;
+import com.lesamis.lesAmisSpring.repositories.ReservaVueloRepository;
 import com.lesamis.lesAmisSpring.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,12 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    @Autowired
+    ReservaVueloRepository reservaVueloRepository;
+
+    @Autowired
+    ReservaHotelRepository reservaHotelRepository;
+
     public List<UsuarioModel> obtenerUsuarios(){
         return usuarioRepository.findAll();
     }
@@ -21,6 +31,7 @@ public class UsuarioService {
     public Optional<UsuarioModel> obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
     }
+
 
     public Optional<UsuarioModel> obtenerPorDni(Long dni) {
         return usuarioRepository.findByDni(dni);
@@ -62,12 +73,12 @@ public class UsuarioService {
     public boolean existByUsuarioAndPassword(String usuario, String password){
         return usuarioRepository.existsByUsuarioAndPassword(usuario, password);
     }
-//    public boolean eliminarUsuario(Long id) {
-//        try {
-//            usuarioRepository.deleteById(id);
-//            return true;
-//        } catch (Exception err) {
-//            return false;
-//        }
-//    }
+
+    public  Optional<ReservaVueloModel> obtenerReservasVuelo(Long id){
+        return reservaVueloRepository.findByVuelo_Id(id);
+    }
+
+    public Optional<ReservaHotelModel> obtenerReservasHotel(Long id){
+        return reservaHotelRepository.findByUsuario_Id(id);
+    }
 }

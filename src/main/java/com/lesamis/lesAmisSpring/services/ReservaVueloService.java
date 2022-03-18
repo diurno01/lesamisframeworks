@@ -1,7 +1,14 @@
 package com.lesamis.lesAmisSpring.services;
 
+import com.lesamis.lesAmisSpring.models.Requests.ReservaVueloRequest;
 import com.lesamis.lesAmisSpring.models.ReservaVueloModel;
+import com.lesamis.lesAmisSpring.models.SucursalModel;
+import com.lesamis.lesAmisSpring.models.UsuarioModel;
+import com.lesamis.lesAmisSpring.models.VueloModel;
 import com.lesamis.lesAmisSpring.repositories.ReservaVueloRepository;
+import com.lesamis.lesAmisSpring.repositories.SucursalRepository;
+import com.lesamis.lesAmisSpring.repositories.UsuarioRepository;
+import com.lesamis.lesAmisSpring.repositories.VueloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +21,15 @@ public class ReservaVueloService {
     @Autowired
     ReservaVueloRepository reservaVueloRepository;
 
+    @Autowired
+    VueloRepository vueloRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
+    SucursalRepository sucursalRepository;
+
     public List<ReservaVueloModel> obtenerReservasVuelo(){
         return reservaVueloRepository.findAll();
     }
@@ -24,11 +40,15 @@ public class ReservaVueloService {
 
 
     public Optional<ReservaVueloModel> obtenerReservasVueloPorUsuario(Long id){
-        return reservaVueloRepository.findByIdUsuario(id);
+        return reservaVueloRepository.findByVuelo_Id(id);
     }
 
-    public void agregarReservaVuelo(ReservaVueloModel reserva){
-        reservaVueloRepository.save(reserva);
+    public void agregarReservaVuelo(ReservaVueloRequest reserva){
+        VueloModel vuelo = vueloRepository.findById(reserva.getIdVuelo()).get();
+        UsuarioModel usuario = usuarioRepository.findById(reserva.getIdUsuario()).get();
+        SucursalModel sucursal = sucursalRepository.findById(reserva.getIdSucursal()).get();
+
+        reservaVueloRepository.save(new ReservaVueloModel(reserva.getClase(),usuario,vuelo,sucursal));
     }
 
     public void delete(Long id){
@@ -38,8 +58,9 @@ public class ReservaVueloService {
     public boolean existsById(Long id){
         return reservaVueloRepository.existsById(id);
     }
+
     public boolean existsByIdUsuario(Long id){
-        return reservaVueloRepository.existsByIdUsuario(id);
+        return reservaVueloRepository.existsByUsuario_Id(id);
     }
 }
 

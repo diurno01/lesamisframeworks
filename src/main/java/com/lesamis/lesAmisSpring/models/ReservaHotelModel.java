@@ -1,6 +1,8 @@
 package com.lesamis.lesAmisSpring.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,23 +15,27 @@ public class ReservaHotelModel {
     @Column(unique = true, nullable = false)
     private Long id;
 
+    @ManyToOne
+    private UsuarioModel usuario;
 
-    private Long idUsuario;
+    @ManyToOne
+    private HotelModel hotel;
 
-
-    private Long idHotel;
     private String pension;
-    private Long idSucursal;
+
+    @ManyToOne
+    private SucursalModel sucursal;
+
     private LocalDate fechaDeIngreso;
     private LocalDate fechaDeEgreso;
 
     public ReservaHotelModel(){};
 
-    public ReservaHotelModel(Long idUsuario, Long idHotel, String pension, Long idSucursal, LocalDate fechaDeIngreso, LocalDate fechaDeEgreso) {
-        this.idUsuario = idUsuario;
-        this.idHotel = idHotel;
+    public ReservaHotelModel(UsuarioModel usuario, HotelModel hotel, String pension, SucursalModel sucursal, LocalDate fechaDeIngreso, LocalDate fechaDeEgreso) {
+        this.usuario = usuario;
+        this.hotel = hotel;
         this.pension = pension;
-        this.idSucursal = idSucursal;
+        this.sucursal = sucursal;
         this.fechaDeIngreso = fechaDeIngreso;
         this.fechaDeEgreso = fechaDeEgreso;
     }
@@ -42,20 +48,20 @@ public class ReservaHotelModel {
         this.id = id;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public UsuarioModel getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
 
-    public Long getIdHotel() {
-        return idHotel;
+    public HotelModel getHotel() {
+        return hotel;
     }
 
-    public void setIdHotel(Long idHotel) {
-        this.idHotel = idHotel;
+    public void setHotel(HotelModel hotel) {
+        this.hotel = hotel;
     }
 
     public String getPension() {
@@ -66,12 +72,12 @@ public class ReservaHotelModel {
         this.pension = pension;
     }
 
-    public Long getIdSucursal() {
-        return idSucursal;
+    public SucursalModel getSucursal() {
+        return sucursal;
     }
 
-    public void setIdSucursal(Long idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setSucursal(SucursalModel sucursal) {
+        this.sucursal = sucursal;
     }
 
     public LocalDate getFechaDeIngreso() {

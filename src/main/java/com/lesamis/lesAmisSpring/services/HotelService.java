@@ -1,8 +1,10 @@
 package com.lesamis.lesAmisSpring.services;
 
 import com.lesamis.lesAmisSpring.models.HotelModel;
+import com.lesamis.lesAmisSpring.models.ReservaHotelModel;
 import com.lesamis.lesAmisSpring.models.VueloModel;
 import com.lesamis.lesAmisSpring.repositories.HotelRepository;
+import com.lesamis.lesAmisSpring.repositories.ReservaHotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +18,14 @@ public class HotelService {
     @Autowired
     HotelRepository hotelRepository;
 
+    @Autowired
+    ReservaHotelRepository reservaHotelRepository;
+
 
     public List<HotelModel> obtenerHoteles(){
         return hotelRepository.findAll();
     }
 
-//    public ArrayList<HotelModel> obtenerHoteles(){
-//        return (ArrayList<HotelModel>) hotelRepository.findAll();
-//    }
 
     public Optional<HotelModel> obtenerHotelPorId(Long id){
         return hotelRepository.findById(id);
@@ -49,17 +51,9 @@ public class HotelService {
         return hotelRepository.existsByNombre(nombre);
     }
 
-//    public Optional<HotelModel> obtenerHotelPorId(Long id){
-//        return hotelRepository.findById(id);
-//    }
-
-
-//    public boolean eliminarHotel(Long id) {
-//        try{
-//            hotelRepository.deleteById(id);
-//            return true;
-//        }catch(Exception err){
-//            return false;
-//        }
-//    }
+    public Optional<ReservaHotelModel> obtenerReservasHotel(Long id){
+        return reservaHotelRepository.findByUsuario_Id(id);
+    }
 }
+
+

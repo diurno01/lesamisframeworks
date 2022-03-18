@@ -3,6 +3,12 @@ package com.lesamis.lesAmisSpring.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lesamis.lesAmisSpring.models.ReservaVueloModel;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "usuarios")
 public class UsuarioModel {
@@ -37,6 +43,48 @@ public class UsuarioModel {
         this.sucursal = sucursal;
         this.tipo = tipo;
     }
+
+    //----------------------------reservas------------------------------------
+
+//    public void agregarReservaVuelo(ReservaVueloModel reservaVueloModel){
+//        if(this.reservasVuelo == null) this.reservasVuelo = new ArrayList<>();
+//        this.reservasVuelo.add(reservaVueloModel);
+//        reservaVueloModel.setUsuario(this);
+//    }
+
+//    public void agregarReservaHotel(ReservaHotelModel reservaHotelModel){
+//        if(this.reservasHotel == null) this.reservasHotel = new ArrayList<>();
+//        this.reservasHotel.add(reservaHotelModel);
+//        reservaHotelModel.setUsuario(this);
+//    }
+
+//    public void eliminarReservaVuelo(ReservaVueloModel reservaVueloModel){
+//        this.reservasVuelo.remove(reservaVueloModel);
+//    }
+//
+//    public void eliminarReservaHotel(ReservaHotelModel reservaHotelModel){
+//        this.reservasHotel.remove(reservaHotelModel);
+//    }
+
+
+//    public List<ReservaVueloModel> getReservasVuelo() {
+//        return reservasVuelo;
+//    }
+//
+//    public void setReservasVuelo(List<ReservaVueloModel> reservasVuelo) {
+//        this.reservasVuelo = reservasVuelo;
+//    }
+
+//    public List<ReservaHotelModel> getReservasHotel() {
+//        return reservasHotel;
+//    }
+//
+//    public void setReservasHotel(List<ReservaHotelModel> reservasHotel) {
+//        this.reservasHotel = reservasHotel;
+//    }
+
+//---------------------------------------------------------------------------
+
 
     public Long getId() {
         return id;
