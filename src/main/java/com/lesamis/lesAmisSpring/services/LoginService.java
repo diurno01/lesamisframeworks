@@ -15,9 +15,7 @@ public class LoginService {
     @Autowired
     LoginRepository loginRepository;
 
-//    public List<LoginModel> obtenerLogins(){
-//        return loginRepository.findAll();
-//    }
+    private UsuarioModel usuarioLogin;
 
     public Optional<UsuarioModel> login(String usuario, String password){
         return loginRepository.findByUsuarioAndPassword(usuario,password);
@@ -27,12 +25,20 @@ public class LoginService {
         return loginRepository.findByUsuario(usuario).get();
     }
 
-
     public boolean existByUsuarioAndPassword(String usuario, String password){
         return loginRepository.existsByUsuarioAndPassword(usuario, password);
     }
 
     public boolean existByUsuario(String usuario){
         return loginRepository.existsByUsuario(usuario);
+    }
+
+    public UsuarioModel getUsuarioLogin() {
+        if(this.usuarioLogin == null) this.usuarioLogin= new UsuarioModel();
+        return usuarioLogin;
+    }
+
+    public void setUsuarioLogin(UsuarioModel usuarioLogin) {
+        this.usuarioLogin = usuarioLogin;
     }
 }

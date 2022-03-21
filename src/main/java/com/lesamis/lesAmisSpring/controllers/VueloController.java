@@ -3,7 +3,9 @@ package com.lesamis.lesAmisSpring.controllers;
 
 import com.lesamis.lesAmisSpring.models.HotelModel;
 import com.lesamis.lesAmisSpring.models.MensajeModel;
+import com.lesamis.lesAmisSpring.models.Requests.VueloRequest;
 import com.lesamis.lesAmisSpring.models.VueloModel;
+import com.lesamis.lesAmisSpring.services.ReservaVueloService;
 import com.lesamis.lesAmisSpring.services.VueloService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 
 @CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
@@ -21,10 +26,28 @@ public class VueloController {
     @Autowired
     VueloService vueloService;
 
+    @Autowired
+    ReservaVueloService reservaVueloService;
+
     @GetMapping("/lista")
-    public ResponseEntity<List<VueloModel>> obtenerVuelos(){
+    public ResponseEntity<List<VueloRequest>> obtenerVuelos(){
         List<VueloModel> list = vueloService.obtenerVuelos();
-        return new ResponseEntity(list, HttpStatus.OK);
+        List<VueloRequest> lista = new ArrayList<VueloRequest>();
+
+        for(VueloModel vuelo :list) {
+            VueloRequest vr = new VueloRequest(
+                    vuelo.getId(),
+                    vuelo.getNumeroDeVuelo(),
+                    vuelo.getFechaYHora(),
+                    vuelo.getOrigen(),
+                    vuelo.getDestino(),
+                    (vuelo.getPlazasClaseTurista()+vuelo.getPlazasPrimeraClase()),
+                    (vuelo.getPlazasClaseTurista()-reservaVueloService.obtenerReservasVueloTurista(vuelo.getId()))
+                    );
+          lista.add(vr);
+        }
+
+        return new ResponseEntity(lista, HttpStatus.OK);
     }
 
     @GetMapping("/detalle/{id}")
@@ -42,16 +65,11 @@ public class VueloController {
         return new ResponseEntity(vuelo, HttpStatus.OK);
     }
 
-//    @GetMapping("/detalle/{nombre}")
-//    public ResponseEntity<HotelModel> obtenerPorNumeroDeVuelo(@PathVariable("nombre") Long numeroDeVuelo){
-//        if(!vueloService.existsByNumeroDeVuelo(numeroDeVuelo))
-//            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
-//        VueloModel vuelo = vueloService.obtenerVueloPorId(numeroDeVuelo).get();
-//        return new ResponseEntity(vuelo, HttpStatus.OK);
-//    }
+
 
     @PostMapping("/crear")
     public ResponseEntity<VueloModel> create(@RequestBody VueloModel vuelo){
+
         if(StringUtils.isBlank(vuelo.getNumeroDeVuelo().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar el numero de vuelo"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(vuelo.getFechaYHora().toString()))
@@ -64,12 +82,12 @@ public class VueloController {
             return new ResponseEntity(new MensajeModel("La cantidad de plazas de primera clase debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(vuelo.getPlazasClaseTurista() == null || vuelo.getPlazasClaseTurista() < 0 )
             return new ResponseEntity(new MensajeModel("La cantidad de plazas de clase turista debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
-        if(vuelo.getPrecioPrimeraClase() == null || vuelo.getPrecioPrimeraClase() < 0 )
-            return new ResponseEntity(new MensajeModel("El precio de primera clase debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
-        if(vuelo.getPrecioClaseturista() == null || vuelo.getPrecioClaseturista() < 0 )
-            return new ResponseEntity(new MensajeModel("El precio de clase turista debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
-        if(vuelo.getPrecioClaseturista() > vuelo.getPrecioPrimeraClase() )
-            return new ResponseEntity(new MensajeModel("El precio de primeraclase tiene que ser superior al de la clase turista"), HttpStatus.BAD_REQUEST);
+//        if(vuelo.getPrecioPrimeraClase() == null || vuelo.getPrecioPrimeraClase() < 0 )
+//            return new ResponseEntity(new MensajeModel("El precio de primera clase debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+//        if(vuelo.getPrecioClaseturista() == null || vuelo.getPrecioClaseturista() < 0 )
+//            return new ResponseEntity(new MensajeModel("El precio de clase turista debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+//        if(vuelo.getPrecioClaseturista() > vuelo.getPrecioPrimeraClase() )
+//            return new ResponseEntity(new MensajeModel("El precio de primeraclase tiene que ser superior al de la clase turista"), HttpStatus.BAD_REQUEST);
         if(vueloService.existsByNumeroDeVuelo(vuelo.getNumeroDeVuelo()))
             return new ResponseEntity(new MensajeModel("El numero de vuelo ya existe"), HttpStatus.BAD_REQUEST);
         VueloModel vueloModel = new VueloModel(vuelo.getNumeroDeVuelo(),
@@ -77,9 +95,10 @@ public class VueloController {
                 vuelo.getOrigen(),
                 vuelo.getDestino(),
                 vuelo.getPlazasPrimeraClase(),
-                vuelo.getPlazasClaseTurista(),
-                vuelo.getPrecioPrimeraClase(),
-                vuelo.getPrecioClaseturista());
+                vuelo.getPlazasClaseTurista()
+//                vuelo.getPrecioPrimeraClase(),
+//                vuelo.getPrecioClaseturista()
+        );
         vueloService.agregarVuelo(vueloModel);
         return new ResponseEntity(new MensajeModel("El vuelo ha sido registrado exitosamente") , HttpStatus.OK);
     }
@@ -102,12 +121,12 @@ public class VueloController {
             return new ResponseEntity(new MensajeModel("La cantidad de plazas de primera clase debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
         if(vuelo.getPlazasClaseTurista() == null || vuelo.getPlazasClaseTurista() < 0 )
             return new ResponseEntity(new MensajeModel("La cantidad de plazas de clase turista debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
-        if(vuelo.getPrecioPrimeraClase() == null || vuelo.getPrecioPrimeraClase() < 0 )
-            return new ResponseEntity(new MensajeModel("El precio de primera clase debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
-        if(vuelo.getPrecioClaseturista() == null || vuelo.getPrecioClaseturista() < 0 )
-            return new ResponseEntity(new MensajeModel("El precio de clase turista debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
-        if(vuelo.getPrecioClaseturista() > vuelo.getPrecioPrimeraClase() )
-            return new ResponseEntity(new MensajeModel("El precio de primeraclase tiene que ser superior al de la clase turista"), HttpStatus.BAD_REQUEST);
+//        if(vuelo.getPrecioPrimeraClase() == null || vuelo.getPrecioPrimeraClase() < 0 )
+//            return new ResponseEntity(new MensajeModel("El precio de primera clase debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+//        if(vuelo.getPrecioClaseturista() == null || vuelo.getPrecioClaseturista() < 0 )
+//            return new ResponseEntity(new MensajeModel("El precio de clase turista debe ser mayor que 0"), HttpStatus.BAD_REQUEST);
+//        if(vuelo.getPrecioClaseturista() > vuelo.getPrecioPrimeraClase() )
+//            return new ResponseEntity(new MensajeModel("El precio de primeraclase tiene que ser superior al de la clase turista"), HttpStatus.BAD_REQUEST);
 
 
         VueloModel vueloModel = vueloService.obtenerVueloPorId(id).get();
@@ -116,9 +135,9 @@ public class VueloController {
         vueloModel.setOrigen(vuelo.getOrigen());
         vueloModel.setDestino(vuelo.getDestino());
         vueloModel.setPlazasPrimeraClase(vuelo.getPlazasPrimeraClase());
-        vueloModel.setPrecioClaseturista(vuelo.getPrecioClaseturista());
-        vueloModel.setPrecioPrimeraClase(vueloModel.getPrecioPrimeraClase());
         vueloModel.setPlazasClaseTurista(vuelo.getPlazasClaseTurista());
+//        vueloModel.setPrecioClaseturista(vuelo.getPrecioClaseturista());
+//        vueloModel.setPrecioPrimeraClase(vueloModel.getPrecioPrimeraClase());
 
         vueloService.agregarVuelo(vueloModel);
         return new ResponseEntity(new MensajeModel("Vuelo actualizado exitosamente"), HttpStatus.OK);

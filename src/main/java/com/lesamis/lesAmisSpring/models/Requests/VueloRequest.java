@@ -1,35 +1,29 @@
-package com.lesamis.lesAmisSpring.models;
+package com.lesamis.lesAmisSpring.models.Requests;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "vuelos")
+public class VueloRequest {
 
-public class VueloModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
     private Long id;
-
     private Long numeroDeVuelo;
-
     private LocalDateTime fechaYHora;
     private String origen;
     private String destino;
-    private Integer plazasPrimeraClase;
-    private Integer plazasClaseTurista;
+    private Integer plazasTotales;
+    private Integer plazasClaseTuristaDisponible;
 
+    public VueloRequest() {
 
-    public VueloModel(){};
+    }
 
-    public VueloModel(Long numeroDeVuelo, LocalDateTime fechaYHora, String origen, String destino, Integer plazasPrimeraClase, Integer plazasClaseTurista) {
+    public VueloRequest(Long id, Long numeroDeVuelo, LocalDateTime fechaYHora, String origen, String destino, Integer plazasTotales, Integer plazasClaseTuristaDisponible) {
+        this.id = id;
         this.numeroDeVuelo = numeroDeVuelo;
         this.fechaYHora = fechaYHora;
         this.origen = origen;
         this.destino = destino;
-        this.plazasPrimeraClase = plazasPrimeraClase;
-        this.plazasClaseTurista = plazasClaseTurista;
+        this.plazasTotales = plazasTotales;
+        this.plazasClaseTuristaDisponible = plazasClaseTuristaDisponible;
     }
 
     public Long getId() {
@@ -72,20 +66,19 @@ public class VueloModel {
         this.destino = destino;
     }
 
-    public Integer getPlazasPrimeraClase() {
-        return plazasPrimeraClase;
+    public Integer getPlazasTotales() {
+        return plazasTotales;
     }
 
-    public void setPlazasPrimeraClase(Integer plazasPrimeraClase) {
-        this.plazasPrimeraClase = plazasPrimeraClase;
+    public void setPlazasTotales(Integer plazasTotales) {
+        this.plazasTotales = plazasTotales;
     }
 
-    public Integer getPlazasClaseTurista() {
-        return plazasClaseTurista;
+    public Integer getPlazasClaseTuristaDisponible() {
+        return plazasClaseTuristaDisponible;
     }
 
-    public void setPlazasClaseTurista(Integer plazasClaseTurista) {
-        this.plazasClaseTurista = plazasClaseTurista;
+    public void setPlazasClaseTuristaDisponible(Integer plazasClaseTuristaDisponible) {
+        this.plazasClaseTuristaDisponible = plazasClaseTuristaDisponible;
     }
-
 }

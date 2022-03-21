@@ -1,10 +1,7 @@
 package com.lesamis.lesAmisSpring.services;
 
-import com.lesamis.lesAmisSpring.models.HotelModel;
+import com.lesamis.lesAmisSpring.models.*;
 import com.lesamis.lesAmisSpring.models.Requests.ReservaHotelRequest;
-import com.lesamis.lesAmisSpring.models.ReservaHotelModel;
-import com.lesamis.lesAmisSpring.models.SucursalModel;
-import com.lesamis.lesAmisSpring.models.UsuarioModel;
 import com.lesamis.lesAmisSpring.repositories.HotelRepository;
 import com.lesamis.lesAmisSpring.repositories.ReservaHotelRepository;
 import com.lesamis.lesAmisSpring.repositories.SucursalRepository;
@@ -35,11 +32,11 @@ public class ReservaHotelService {
         return reservaHotelRepository.findAll();
     }
 
-    public Optional<ReservaHotelModel> obtenerReservaHotelPorId(Long id){
-        return reservaHotelRepository.findById(id);
-    }
+//    public Optional<ReservaHotelModel> obtenerReservaHotelPorId(Long id){
+//        return reservaHotelRepository.findById(id);
+//    }
 
-    public Optional<ReservaHotelModel> obtenerReservasHotelPorUsuario(Long id){
+    public List<ReservaHotelModel> obtenerReservasHotelPorUsuario(Long id){
         return reservaHotelRepository.findByUsuario_Id(id);
     }
 
@@ -64,4 +61,18 @@ public class ReservaHotelService {
     public boolean existsById(Long id){
         return reservaHotelRepository.existsById(id);
     }
+
+    public int obtenerReservasHotePorHotel(Long id){
+        List<ReservaHotelModel>  list = reservaHotelRepository.findByHotel_Id(id);
+        return list.size();
+    }
+
+    public boolean existsByHotel_Id(Long id){
+        return reservaHotelRepository.existsByHotel_Id(id);
+    }
+    public boolean existsByUsuario_Id(Long id){
+        return reservaHotelRepository.existsByUsuario_Id(id);
+    }
+
+
 }

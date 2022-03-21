@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
 @RequestMapping("/login")
@@ -24,6 +26,13 @@ public class LoginController {
         if(!usuarioService.existByUsuarioAndPassword(loginModel.getUsuario(), loginModel.getPassword()))
             return new ResponseEntity(new MensajeModel("Este usuario no existe, vuelva a intentar."), HttpStatus.NOT_FOUND);
         UsuarioModel user = usuarioService.login(loginModel.getUsuario(), loginModel.getPassword()).get();
+        usuarioService.setUsuarioLogin(user);
+        return new ResponseEntity(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/usuario")
+    public ResponseEntity<UsuarioModel> obtenerUsuario(){
+       UsuarioModel user = usuarioService.getUsuarioLogin();
         return new ResponseEntity(user, HttpStatus.OK);
     }
 

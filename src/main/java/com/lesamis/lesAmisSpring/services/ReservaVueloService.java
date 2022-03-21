@@ -39,8 +39,13 @@ public class ReservaVueloService {
     }
 
 
-    public Optional<ReservaVueloModel> obtenerReservasVueloPorUsuario(Long id){
-        return reservaVueloRepository.findByVuelo_Id(id);
+    public List<ReservaVueloModel> obtenerReservasVueloPorUsuario(Long id){
+        return reservaVueloRepository.findByUsuario_Id(id);
+    }
+
+    public int obtenerReservasVueloTurista(Long id){
+                List<ReservaVueloModel>  list = reservaVueloRepository.findByVuelo_IdAndClase(id,"CLASE_TURISTA");
+        return list.size();
     }
 
     public void agregarReservaVuelo(ReservaVueloRequest reserva){
@@ -51,6 +56,8 @@ public class ReservaVueloService {
         reservaVueloRepository.save(new ReservaVueloModel(reserva.getClase(),usuario,vuelo,sucursal));
     }
 
+
+
     public void delete(Long id){
         reservaVueloRepository.deleteById(id);
     }
@@ -59,6 +66,13 @@ public class ReservaVueloService {
         return reservaVueloRepository.existsById(id);
     }
 
+    public boolean existsByVuelo_Id(Long id){
+        return reservaVueloRepository.existsByVuelo_Id(id);
+    }
+
+    public boolean existsByVuelo_NumeroDeVuelo(Long numeroDeVuelo){
+        return reservaVueloRepository.existsByVuelo_NumeroDeVuelo(numeroDeVuelo);
+    }
     public boolean existsByIdUsuario(Long id){
         return reservaVueloRepository.existsByUsuario_Id(id);
     }

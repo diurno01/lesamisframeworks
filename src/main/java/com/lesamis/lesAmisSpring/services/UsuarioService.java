@@ -24,6 +24,17 @@ public class UsuarioService {
     @Autowired
     ReservaHotelRepository reservaHotelRepository;
 
+    private UsuarioModel usuarioLogin;
+
+    public UsuarioModel getUsuarioLogin() {
+        if(this.usuarioLogin == null) this.usuarioLogin= new UsuarioModel();
+        return usuarioLogin;
+    }
+
+    public void setUsuarioLogin(UsuarioModel usuarioLogin) {
+        this.usuarioLogin = usuarioLogin;
+    }
+
     public List<UsuarioModel> obtenerUsuarios(){
         return usuarioRepository.findAll();
     }
@@ -41,10 +52,9 @@ public class UsuarioService {
         return usuarioRepository.findByUsuario(usuario);
     }
 
-    public Optional<UsuarioModel> obtenerUsuariosPorTipo(String Tipo) {
+    public List<UsuarioModel> obtenerUsuariosPorTipo(java.lang.String Tipo) {
         return usuarioRepository.findByTipo(Tipo);
     }
-
 
     public UsuarioModel agregarUsuario(UsuarioModel usuario) {
         return usuarioRepository.save(usuario);
@@ -67,6 +77,7 @@ public class UsuarioService {
     }
 
     public Optional<UsuarioModel> login(String usuario, String password){
+
         return usuarioRepository.findByUsuarioAndPassword(usuario,password);
     }
 
@@ -78,7 +89,8 @@ public class UsuarioService {
         return reservaVueloRepository.findByVuelo_Id(id);
     }
 
-    public Optional<ReservaHotelModel> obtenerReservasHotel(Long id){
+    public List<ReservaHotelModel> obtenerReservasHotel(Long id){
         return reservaHotelRepository.findByUsuario_Id(id);
     }
+
 }

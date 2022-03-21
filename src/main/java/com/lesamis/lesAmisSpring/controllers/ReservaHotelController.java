@@ -5,6 +5,7 @@ import com.lesamis.lesAmisSpring.models.MensajeModel;
 import com.lesamis.lesAmisSpring.models.Requests.ReservaHotelRequest;
 import com.lesamis.lesAmisSpring.models.Requests.ReservaVueloRequest;
 import com.lesamis.lesAmisSpring.models.ReservaHotelModel;
+import com.lesamis.lesAmisSpring.models.ReservaVueloModel;
 import com.lesamis.lesAmisSpring.services.ReservaHotelService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,20 @@ public class ReservaHotelController {
 
     @GetMapping("/detalle/{id}")
     public ResponseEntity<Optional<ReservaHotelModel>> obtenerReservasHotelPorIdUsuario(@PathVariable("id") Long id){
-        if(!reservaHotelService.existsById(id))
+        if(!reservaHotelService.existsByUsuario_Id(id))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
-        Optional<ReservaHotelModel> reserva = reservaHotelService.obtenerReservasHotelPorUsuario(id);
+        List<ReservaHotelModel> reserva = reservaHotelService.obtenerReservasHotelPorUsuario(id);
+        return new ResponseEntity(reserva, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/hotel/{id}")
+    public ResponseEntity<Optional<ReservaVueloModel>> obtenerReservasHotelPorHotel(@PathVariable("id") Long id){
+        if(!reservaHotelService.existsByHotel_Id(id))
+            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+
+        int reserva = reservaHotelService.obtenerReservasHotePorHotel(id);
+
         return new ResponseEntity(reserva, HttpStatus.OK);
     }
 

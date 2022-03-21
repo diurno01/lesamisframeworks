@@ -51,7 +51,7 @@ public class HotelService {
         return hotelRepository.existsByNombre(nombre);
     }
 
-    public Optional<ReservaHotelModel> obtenerReservasHotel(Long id){
+    public List<ReservaHotelModel> obtenerReservasHotel(Long id){
         return reservaHotelRepository.findByUsuario_Id(id);
     }
 }

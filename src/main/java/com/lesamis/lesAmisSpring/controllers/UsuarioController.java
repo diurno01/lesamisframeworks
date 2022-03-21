@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
@@ -37,7 +38,7 @@ public class UsuarioController {
 
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity<UsuarioModel> obtenerUsuarioPorId(@PathVariable("tipo") String tipo){
-        UsuarioModel usuario = usuarioService.obtenerUsuariosPorTipo(tipo).get();
+        List<UsuarioModel> usuario = usuarioService.obtenerUsuariosPorTipo(tipo);
         return new ResponseEntity(usuario, HttpStatus.OK);
     }
 

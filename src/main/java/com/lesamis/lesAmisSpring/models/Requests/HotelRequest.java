@@ -1,30 +1,23 @@
-package com.lesamis.lesAmisSpring.models;
+package com.lesamis.lesAmisSpring.models.Requests;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "hoteles")
-public class HotelModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
+public class HotelRequest {
     private Long id;
-
     private String nombre;
     private String direccion;
     private String ciudad;
     private String telefono;
-    private Integer numeroDePlazas;
+    private Integer numeroDePlazasDisponibles;
 
+    public HotelRequest() {
+    }
 
-    public HotelModel(){};
-
-    public HotelModel(String nombre, String direccion, String ciudad, String telefono, Integer numeroDePlazas) {
+    public HotelRequest(Long id, String nombre, String direccion, String ciudad, String telefono, Integer numeroDePlazasDisponibles) {
+        this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.ciudad = ciudad;
         this.telefono = telefono;
-        this.numeroDePlazas = numeroDePlazas;
+        this.numeroDePlazasDisponibles = numeroDePlazasDisponibles;
     }
 
     public Long getId() {
@@ -67,13 +60,11 @@ public class HotelModel {
         this.telefono = telefono;
     }
 
-    public Integer getNumeroDePlazas() {
-        return numeroDePlazas;
+    public Integer getNumeroDePlazasDisponibles() {
+        return numeroDePlazasDisponibles;
     }
 
-    public void setNumeroDePlazas(Integer numeroDePlazas) {
-        this.numeroDePlazas = numeroDePlazas;
+    public void setNumeroDePlazasDisponibles(Integer numeroDePlazasDisponibles) {
+        this.numeroDePlazasDisponibles = numeroDePlazasDisponibles;
     }
-
-
 }

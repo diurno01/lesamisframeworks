@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200",maxAge = 3600)
 @RestController
-@RequestMapping("/reservasVuelo")
+@RequestMapping("/reservasvuelo")
 
 public class ReservaVueloController {
 
@@ -28,12 +28,22 @@ public class ReservaVueloController {
     }
 
     @GetMapping("/detalle/{id}")
-    public ResponseEntity<Optional<ReservaVueloModel>> obtenerReservasVueloPorIdUsuario(@PathVariable("id") Long id){
+    public ResponseEntity<List<ReservaVueloModel>> obtenerReservasVueloPorIdUsuario(@PathVariable("id") Long id){
         if(!reservaVueloService.existsByIdUsuario(id))
             return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
-        Optional<ReservaVueloModel> reserva = reservaVueloService.obtenerReservasVueloPorUsuario(id);
+        List<ReservaVueloModel> reserva = reservaVueloService.obtenerReservasVueloPorUsuario(id);
             return new ResponseEntity(reserva, HttpStatus.OK);
     }
+
+//    @GetMapping("/reservaturista/{id}")
+//    public ResponseEntity<Optional<ReservaVueloModel>> obtenerReservasVueloTurista(@PathVariable("id") Long id){
+//        if(!reservaVueloService.existsByVuelo_Id(id))
+//            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
+//
+//        int reserva = reservaVueloService.obtenerReservasVueloTurista(id);
+//
+//        return new ResponseEntity(reserva, HttpStatus.OK);
+//    }
 
     @PostMapping("/crear")
     public ResponseEntity<ReservaVueloModel> create(@RequestBody ReservaVueloRequest reserva){
@@ -46,13 +56,13 @@ public class ReservaVueloController {
         if(StringUtils.isBlank(reserva.getIdSucursal().toString()))
             return new ResponseEntity(new MensajeModel("Olvido competar la sucursal de la reserva"), HttpStatus.BAD_REQUEST);
 
-        ReservaVueloRequest reservaVueloModel = new ReservaVueloRequest(
+        ReservaVueloRequest reservaVueloRequest = new ReservaVueloRequest(
                 reserva.getClase(),
                 reserva.getIdUsuario(),
                 reserva.getIdVuelo(),
                 reserva.getIdSucursal()
                );
-        reservaVueloService.agregarReservaVuelo(reservaVueloModel);
+        reservaVueloService.agregarReservaVuelo(reservaVueloRequest);
         return new ResponseEntity(new MensajeModel("La reserva del hotel ha sido registrada exitosamente") , HttpStatus.OK);
     }
 
