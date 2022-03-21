@@ -35,16 +35,6 @@ public class ReservaVueloController {
             return new ResponseEntity(reserva, HttpStatus.OK);
     }
 
-//    @GetMapping("/reservaturista/{id}")
-//    public ResponseEntity<Optional<ReservaVueloModel>> obtenerReservasVueloTurista(@PathVariable("id") Long id){
-//        if(!reservaVueloService.existsByVuelo_Id(id))
-//            return new ResponseEntity(new MensajeModel("no existe"), HttpStatus.NOT_FOUND);
-//
-//        int reserva = reservaVueloService.obtenerReservasVueloTurista(id);
-//
-//        return new ResponseEntity(reserva, HttpStatus.OK);
-//    }
-
     @PostMapping("/crear")
     public ResponseEntity<ReservaVueloModel> create(@RequestBody ReservaVueloRequest reserva){
         if(StringUtils.isBlank(reserva.getIdUsuario().toString()))
